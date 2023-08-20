@@ -5,34 +5,139 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
-  
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
 
 <body>
-  <main class="mt-5">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark p-1"> <!--se deja nav fijo-->
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+          </li>
+        </ul>
       </div>
     </div>
+  </nav>
+
+  <main class="main-login">
+    <div class="form-popup" id="myPopup"> <!--edito clase y id para posterior css-->
+
+      <div id="container-signIn"> <!--Agregué el Id container-signIn-->
+        <!--FC: cambie el título de lugar--> <!--cambio encabezado-->
+
+        <form action="" class="form-container" id="formulario"> <!--agrego clase para css-->
+          <div>
+            <div>
+              <h1>Registro</h1>
+              <!--<label for="nombre" class="form-label">Nombre</label>-->
+              <input type="text" placeholder="Escriba primer nombre" class="form-control" id="nombre" required>
+            </div>
+
+            <div>
+              <!--<label for="apellido" class="form-label">Apellido</label>-->
+              <input type="text" placeholder="Escriba primer apellido" class="form-control" id="apellido" required>
+            </div>
+
+            <div>
+              <input type="email" placeholder="Escriba mail válido" class="form-control" id="email" required>
+              <!--<label for="email" class="form-label">Email</label>-->
+
+
+              <div class="input-group">
+                <input class="form-control" type="Password" placeholder="Escriba su contraseña" name="password"
+                  id="password1" required>
+                <button id="ojito1" type="button" onclick="mostrarPassword()" class="fa fa-eye"></button>
+              </div>
+
+
+
+
+            </div>
+            <div>
+              <!--<label for="password1" class="form-label">Contraseña</label>-->
+              <!--<input type="password" placeholder="Escriba su contraseña" class="form-control" id="password1" required>-->
+
+              <!--Este es el mensaje de validación de contraseña-->
+              <div class="message-triangle"></div>
+              <div id="mensaje">
+                <h3>La contraseña debe cumplir con los siguientes requisitos:</h3>
+                <p id="length" class="invalid">Largo mínimo de <b>6 carácteres</b></p>
+                <p id="special" class="invalid">Al menos <b>1 caracter especial</b></p>
+                <p id="number" class="invalid">Al menos <b>1 número</b></p>
+                <p id="mayus" class="invalid">Al menos <b>1 letra mayúscula</b></p>
+                <p id="minus" class="invalid">Al menos <b>1 letra minuscula</b></p>
+
+              </div>
+            </div>
+
+
+            <!--<label for="password2" class="form-label">Repetir contraseña</label>-->
+
+            <!--ojito 2-->
+            <div class="input-group">
+              <input class="form-control" type="Password" placeholder="Escriba su contraseña" name="password"
+                id="password2" required>
+              <button id="ojito2" type="button" onclick="mostrarPassword2()" class="fa fa-eye"> </button>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="terminos">
+              <label class="form-check-label" for="terminos">Acepto los términos y condiciones del servicio.</label>
+            </div>
+
+            <button type="submit" id="regBtn">Registrarme</button>
+
+          </div>
+        </form>
+      </div>
+
+    </div>
   </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
+  </div>
+
+  <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+    <p>Datos guardados correctamente</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <div class="alert alert-danger alert-dismissible fade" role="alert" id="alert-danger">
+    <p>Los datos ingresados no cumplen con los requisitos solicitados</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  </main>
+
+  <footer class="pie-pagina">
+    <div class="container-footer">
+      <p>
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Es un sitio generado con fines estrictamente educativos. No realiza registros ni guarda datos de
+        ningún tipo.</p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
+
   <script src="js/login.js"></script>
+  <script src="js\bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

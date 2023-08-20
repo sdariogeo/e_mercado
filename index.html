@@ -9,10 +9,11 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark p-1"> <!--se deja nav fijo-->
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,8 +31,42 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="login.html" onclick="openForm()">Crear cuenta</a>
           </li>
+
         </ul>
+      </div>
+    </div>
+    <!-- BLOQUE CODIGO POP UP LOG IN ///////////////////////////////////<<<<<<<<<<<<<<<<< -->
+    <div class="center-login-box">
+
+      <input type="checkbox" class="login-button-ckbox" id="show">
+      <label id="longinbuttonlabel" for="show" class="login-button">Iniciar sesión</label>
+
+      <div class="container-popup">
+        <label for="show" class="close-btn fas fa-times" title="close">X</label>
+        <div class="text">Iniciar sesión</div>
+        <form action="#">
+          <div class="data-login">
+            <label>Email</label>
+            <input id="useremail" type="text" placeholder="Escriba aqui su email" required>
+          </div>
+          <div class="data-login">
+            <label>Contraseña</label>
+            <input id="userpassword" type="password" placeholder="Escriba aqui su contraseña" required>
+          </div>
+          <div class="forgot-pass">
+            <a href="#">Olvidé mi contraseña</a>
+          </div>
+          <div class="btn-login">
+            <div class="inner-login">
+              <button id="loginbutton" type="submit">Entrar</button>
+            </div>
+          </div>
+          <div class="signup-link-login">
+            ¿No tienes usuario? <a href="login.html" target="_blank">Crea tu cuenta</a>
+          </div>
+        </form>
       </div>
     </div>
   </nav>
@@ -82,12 +117,16 @@
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/index.js"></script>
   <script src="js/init.js"></script>
+  <!-- <script src="js/login.js"></script> -->
+  <script src="js/loginValidator.js"></script> <!--s/m ruta al script login-->
+
 </body>
 
 </html>
