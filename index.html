@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
+        <ul class="navbar-nav w-100 justify-content-between" id="barranavegacion">
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Inicio</a>
           </li>
@@ -31,44 +31,51 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.html" onclick="openForm()">Crear cuenta</a>
+            <a class="nav-link" id="botonCrearCuenta" href="login.html" onclick="openForm()">Crear cuenta</a>
           </li>
+          <li class="nav-item">
+            <div class="center-login-box">
 
-        </ul>
-      </div>
-    </div>
-    <!-- BLOQUE CODIGO POP UP LOG IN ///////////////////////////////////<<<<<<<<<<<<<<<<< -->
-    <div class="center-login-box">
-
-      <input type="checkbox" class="login-button-ckbox" id="show">
-      <label id="longinbuttonlabel" for="show" class="login-button">Iniciar sesión</label>
-
-      <div class="container-popup">
-        <label for="show" class="close-btn fas fa-times" title="close">X</label>
-        <div class="text">Iniciar sesión</div>
-        <form action="#">
-          <div class="data-login">
-            <label>Email</label>
-            <input id="useremail" type="text" placeholder="Escriba aqui su email" required>
-          </div>
-          <div class="data-login">
-            <label>Contraseña</label>
-            <input id="userpassword" type="password" placeholder="Escriba aqui su contraseña" required>
-          </div>
-          <div class="forgot-pass">
-            <a href="#">Olvidé mi contraseña</a>
-          </div>
-          <div class="btn-login">
-            <div class="inner-login">
-              <button id="loginbutton" type="submit">Entrar</button>
+              <input type="checkbox" class="login-button-ckbox" id="show">
+              <label id="longinbuttonlabel" for="show" class="login-button">Iniciar sesión</label>
+        
+              <div class="container-popup">
+                <label for="show" class="close-btn" title="close">X</label>
+                  <div class="text">Iniciar sesión</div>
+                    <form action="#">
+                  <div class="data-login">
+                    <label>Email</label>
+                    <input id="useremail" type="text" placeholder="Escriba aqui su email" required>
+                  </div>
+                  <div class="data-login">
+                    <label>Contraseña</label>
+                    <input id="userpassword" type="password" placeholder="Escriba aqui su contraseña" required>
+                  </div>
+                  <div class="forgot-pass">
+                    <a href="#">Olvidé mi contraseña</a>
+                  </div>
+                  <div class="btn-login">
+                    <div class="inner-login">
+                      <button id="loginbutton" type="submit">Entrar</button>
+                    </div>
+                  </div>
+                  <div class="signup-link-login">
+                    ¿No tienes usuario? <a href="login.html" target="_blank">Crea tu cuenta</a>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-          <div class="signup-link-login">
-            ¿No tienes usuario? <a href="login.html" target="_blank">Crea tu cuenta</a>
-          </div>
-        </form>
+            
+          </li>
+          <li class="nav-item">
+            <div id="search-container">
+              <form action="https://maximiliem.github.io/e-mercado/" target="_top">
+               
+              </form>
+            </div>
       </div>
-    </div>
+    </div>     
+    
   </nav>
   <main>
     <div class="jumbotron text-center"></div>
@@ -126,7 +133,7 @@
   <script src="js/init.js"></script>
   <!-- <script src="js/login.js"></script> -->
   <script src="js/loginValidator.js"></script> <!--s/m ruta al script login-->
-
+  
 </body>
 
 </html>

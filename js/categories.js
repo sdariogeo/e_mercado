@@ -141,3 +141,83 @@ document.addEventListener("DOMContentLoaded", function(e){
         showCategoriesList();
     });
 });
+
+function sortAndShowCategories(sortCriteria){
+    
+    ordenado = sortProducts(sortCriteria, productsArray.products);
+
+    showProductsList(ordenado);
+}
+
+/* ----------INICIO CODIGO BARRA BUSQUEDA------------- */
+
+/* EN DESARROLLO
+const searchInputCategoria = document.getElementById('search-input-categoria');
+const searchResultsCategoria = document.getElementById('search-results-categoria');
+
+searchInputCategoria.addEventListener('input', () => {
+  let searchTextCategoria = searchInputCategoria.value.toLowerCase();
+  
+  fetch("https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + ".json")
+    .then(response => response.json())
+    .then(data => {
+      let filteredProducts = data.products.filter(product => product.name.toLowerCase().includes(searchTextCategoria));
+
+      if (filteredProducts.length === 0) {
+        searchResultsCategoria.innerHTML = '<p>No se encontraron resultados</p>';
+      } else {
+        showProductsList(filteredProducts);
+      }
+    })
+    .catch(error => {
+      console.error('Error al obtener los productos:', error);
+    });
+});
+
+function showProductsList(productsArray) {
+  searchResultsCategoria.innerHTML = ''; // Limpiar contenido previo
+  
+  productsArray.forEach(product => {
+    const productDiv = document.createElement('div');
+    
+    const productHTML = `
+      <div class="producto">
+        <img class="imagenCars" src=${product.image}>
+        <div class="divTexto">
+          <div class="divNombre">
+            <p class="nombre">${product.name}</p>
+          </div>
+          <div class="divDescripcion">
+            <p class="descripcion">${product.description}</p>
+          </div>
+          <div class="divPrecio">
+            <p class="precio">Precio: ${product.currency} ${product.cost}</p>
+          </div>
+          <div class="divVendidos">
+            <p class="vendidos">Vendidos: ${product.soldCount}</p>
+          </div>
+        </div>
+      </div>
+      <hr>
+    `;
+    
+    productDiv.innerHTML = productHTML;
+    searchResultsCategoria.appendChild(productDiv);
+  });
+}
+
+
+const productsArray = "https://japceibal.github.io/emercado-api/cats_products/"+localStorage.getItem("catID")+".json";
+
+searchInputProducto.addEventListener('input', () => {
+  let searchTextProducto = searchInputProducto.value.toLowerCase();
+
+  let filteredProducts = productsArray.products.filter(product => product.name.toLowerCase().includes(searchTextProducto));
+
+  if (filteredProducts.length === 0) {
+      searchResultsProducto.innerHTML = '';
+      searchResultsProducto.innerHTML = '<p>No se encontraron resultados</p>'; 
+  } else {
+    showProductsList(filteredProducts);
+  }
+}); */

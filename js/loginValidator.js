@@ -1,53 +1,72 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const elementoMostrarCorreo = document.createElement('span');
+    elementoMostrarCorreo.id = "correoMensajeLogueado"
 
-    // function updateButtonLabel(logueado) {
-    //     if (logueado) {
-    //         longinbuttonlabel.textContent = "Cerrar sesión";
-    //     } else {
-    //         longinbuttonlabel.textContent = "Iniciar sesión";
-    //     }
-    // }
-
-    // Función inicio de sesión
-    function login() {
-        // Obtiene los valores del correo electrónico y la contraseña
-        const userEmail = document.getElementById("useremail").value;
-        const userPassword = document.getElementById("userpassword").value;
-
-        // Verificar si el correo electrónico y la contraseña no están vacíos aca incluir las validaciones de del registro
-        if (userEmail !== "" && userPassword !== "") {
-            // Almacena el estado de inicio de sesión en el almacenamiento local
-            const userlogueado = localStorage.getItem("logueado");
-            localStorage.setItem("logueado", "true");
-            console.log("gonzalo trajo el asadito");
-
-            // Actualiza la etiqueta del botón de inicio de sesión para que muestre cerrar sesion
-            const longinbuttonlabel = document.getElementById("longinbuttonlabel");
-            longinbuttonlabel.textContent = "Cerrar sesión";
-            console.log("nico lo puso en el fuego");
-
-
-            // Oculta el formulario de iniciar sesion
-            const containerPopup = document.querySelector('.container-popup');
-            containerPopup.style.display = 'none';
-            console.log("el duende cortez lo quemó");
-        }
+    
+// Función inicio de sesión
+function login() {
+    // Obtiene los valores del correo electrónico y la contraseña
+    const userEmail = document.getElementById("useremail").value;
+    const userPassword = document.getElementById("userpassword").value;
+  
+    // Verificar si el correo electrónico y la contraseña no están vacíos
+    if (userEmail !== "" && userPassword !== "") {
+      // Almacena el estado de inicio de sesión en el almacenamiento local
+      localStorage.setItem("logueado", "true");
+      // Guardamos el correo ingresado con la clave "email"
+      localStorage.setItem("email", userEmail);
+  
+      // Actualiza la etiqueta del botón de inicio de sesión para que muestre cerrar sesión
+      const longinbuttonlabel = document.getElementById("longinbuttonlabel");
+      longinbuttonlabel.textContent = "Cerrar sesión";
+  
+      // Oculta la etiqueta de crear cuenta
+      const botonCrearCuenta = document.getElementById("botonCrearCuenta");
+      const barranav = document.getElementById("navbarNav");
+      // Ocultar el botón cambiando su estilo
+      botonCrearCuenta.style.display = "none";
+  
+      // Oculta el formulario de iniciar sesión
+      const containerPopup = document.querySelector('.container-popup');
+      containerPopup.style.display = 'none';
+  
+      // Crear un elemento que muestre un saludo al usuario (Correo Loggeado)
+      
+      barranav.appendChild(elementoMostrarCorreo);
+      // Modificamos la classe para mostrarlo y traemos el valor del locar storage
+      elementoMostrarCorreo.className = 'nav-link text-white';
+      elementoMostrarCorreo.textContent = 'Bienvenido: ' + localStorage.getItem('email');
     }
-    // Función para el cierre de sesión
-    function logout() {
-        // Elimina el estado de inicio de sesión del almacenamiento local
-        localStorage.removeItem("logueado");
+  }
+  
+  // Función para el cierre de sesión
+  function logout() {
+    // Elimina el estado de inicio de sesión del almacenamiento local
+    localStorage.removeItem("logueado");
+    localStorage.removeItem("email");
+  
+    // Actualiza la etiqueta del botón por inicio de sesión
+    const longinbuttonlabel = document.getElementById("longinbuttonlabel");
+    longinbuttonlabel.textContent = "Iniciar sesión";
+  
+    // Muestra nuevamente el formulario de inicio de sesión
+    const containerPopup = document.querySelector('.container-popup');
+    containerPopup.style.display = 'block';
+  
+    // Muestra nuevamente el botón de crear usuario 
+    const botonCrearCuenta = document.getElementById("botonCrearCuenta");
 
-        // Actualiza la etiqueta del botón por inicio de sesión
-        const longinbuttonlabel = document.getElementById("longinbuttonlabel");
-        longinbuttonlabel.textContent = "Iniciar sesión";
+    // Ocultar el botón cambiando su estilo
+    botonCrearCuenta.style.display = "block";
 
-        // Muestra nuevamente el formulario de inicio de sesion
-        const containerPopup = document.querySelector('.container-popup');
-        containerPopup.style.display = 'block';
+    // Ocultar el mensaje Cambiando su estio 
+    const elementoMostrarCorreo = document.getElementById("correoMensajeLogueado")
+    //elementoMostrarCorreo.style,display = 'none';
+    elementoMostrarCorreo.parentNode.removeChild(elementoMostrarCorreo)
 
-    }
+  }
+  
 
     // Agregar evento click al botón loginbutton
     const loginbutton = document.getElementById("loginbutton");

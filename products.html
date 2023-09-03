@@ -10,7 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet" />
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 
 </head>
 
@@ -22,7 +22,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
+       <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
           </li>
@@ -41,11 +41,64 @@
     <div class="container">
       <div class="containerCars">
         <div>
-          <h4 class="subtitulo4">AUTOS</h4>
+          <h4 class="subtitulo4">Productos</h4>
         </div>
-        <div class="subtitulo5">Estos son nuestros <span class="autos-negrita">Autos</span> disponibles</div>
+        <div class="subtitulo5">Estos son nuestros <span class="autos-negrita">artículos</span> disponibles</div>
+
+        <div id="search-container-producto">
+          <input type="search" id="search-input-producto" placeholder="Buscar...">
+          <div class="search-results-producto" id="search-results-producto"></div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col text-end">
+              <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+                <input type="radio" class="btn-check" name="options" id="sortAsc">
+                <label class="btn btn-light" for="sortAsc" title="Orden ascendente"><img src="img/inversion.png" alt="sortAsc" width="30"></label>
+                <input type="radio" class="btn-check" name="options" id="sortDesc">
+                <label class="btn btn-light" for="sortDesc" title="Orden descendente"><img src="img/inversion (1).png" alt="sortDesc" width="30"></label>
+                <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
+                <label class="btn btn-light" for="sortByCount" title="Más vendidos"><img src="img/comprar.png" alt="relevancia" width="30"></i></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+              <div class="row container p-0 m-0">
+                <div class="col">
+                  <p class="font-weight-normal text-end my-2">Precio:</p>
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin" alt="Precio mínimo">
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax" alt="Precio máximo">
+                </div>
+                <div class="col-3 p-0">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
+                    <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="list-group" id="cat-list-container">
+            </div>
+          </div>
+        </div>
+
+      
+        </div>
+        
+        
+       
+        
         <hr class="lineaDivision">
-        <div class="lista-cars"></div>
+        
+        <div id="container-listado-productos" class="lista-cars"></div>
       </div>
     </div>
   </main>
