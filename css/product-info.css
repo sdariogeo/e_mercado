@@ -1,0 +1,89 @@
+#detalle-producto {
+  text-align: center;
+  margin-left: 10%;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+h1 { font-size: 250% }
+
+p {font-size: 110%}
+.container-comentarios {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    font-size: 2.2vh;
+    color: rgb(84,84,84);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  
+  .comentarios-usuario {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  }
+  
+  .nombre-usuario {
+    font-weight: bold;
+    font-size: 14px;
+    color: #000408c5;
+  }
+  
+  .titulo-comentarios{
+    margin-top: 50px;
+    font-size: 3.3vh;
+    color: rgb(20, 20, 20);
+    font-weight: 510;
+    margin-bottom: 30px;
+  }
+  .comment-control {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  #commentScore {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 20%;
+    height: 40px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  .label1 {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  .info-producto {
+    margin-top: 50px;
+  }
+  #opinion{
+    font-family: inherit;
+    line-height: inherit;
+  }
+  #agregar{
+    height: 50px;
+    vertical-align: text-bottom;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background-color: rgb(20, 20, 20);
+  }
+  span img {
+
+    width: 45px;
+  
+  }
+
+.info-producto{
+
+text-align: center;
+  }

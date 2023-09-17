@@ -1,9 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
+    // function updateButtonLabel(logueado) {
+    //     if (logueado) {
+    //         longinbuttonlabel.textContent = "Cerrar sesión";
+    //     } else {
+    //         longinbuttonlabel.textContent = "Iniciar sesión";
+    //     }
+    // }
     const elementoMostrarCorreo = document.createElement('span');
     elementoMostrarCorreo.id = "correoMensajeLogueado"
-
-    
 // Función inicio de sesión
 function login() {
     // Obtiene los valores del correo electrónico y la contraseña

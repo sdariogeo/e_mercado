@@ -19,8 +19,8 @@ function mostrarProductos(data) {
   // Iterar a través de los elementos en el arreglo "products" dentro de los datos
   data.products.forEach((item) => {
     // Generar el fragmento de HTML para mostrar la información del producto
-    listaHtml += `<div class="producto">
-     <img class="imagenCars" src=${item.image}>
+    listaHtml += `<div class="producto" data-id="${item.id}">
+     <img class="imagenProductos" src=${item.image}>
 
         <div class="divTexto">
             <div class="divNombre">
@@ -44,11 +44,32 @@ function mostrarProductos(data) {
       `;
   });
 
-  // Obtener el primer elemento con la clase "lista-cars" que fue añadida en products.html
-  const listaCars = document.getElementsByClassName("lista-cars")[0];
+  // Obtener el primer elemento con la clase "lista-productos" que fue añadida en products.html
+  const listaProductos = document.getElementsByClassName("lista-productos")[0];
 
-  // Asignar el HTML generado a la estructura con la clase "lista-cars"
-  listaCars.innerHTML = listaHtml;
+// Asignar el HTML generado a la estructura con la clase "lista-productos"
+listaProductos.innerHTML = listaHtml;
+
+/////////ENTREGA Nª3 CONSIGNA-1/////////
+
+// Almacenar en el localStorage el identificador de un producto
+  function guardarIdProducto(id) {
+    localStorage.setItem('ID_del_producto', id);
+  }
+
+  const productosDivs = document.querySelectorAll('.producto');
+
+  productosDivs.forEach((productoDiv) => {
+    productoDiv.addEventListener('click', () => {
+      // Acá almaceno en una constante el id del producto
+      const dataId = productoDiv.getAttribute('data-id');
+
+      // Llamar a la función para guardar el ID en localStorage
+      guardarIdProducto(dataId);
+      // Luego, redirige al usuario a product-info.html
+      window.location.href = 'product-info.html';
+    });
+  });
 }
 
 // funciones para ordenar ascendente
@@ -89,18 +110,18 @@ function clearInputs() {
 
 function filtrarbusqueda(data) {
   let searchTextProducto = searchInputProducto.value.toLowerCase();
-  
+
   let filteredProductsBusqueda = data.products.filter(item => {
-      const nombreLowerCase = item.name.toLowerCase(); /*para búsqueda por nombre*/
-      const descripcionLowerCase = item.description.toLowerCase(); /*para búsqueda por descripción*/
-      return nombreLowerCase.includes(searchTextProducto) || descripcionLowerCase.includes(searchTextProducto);
-    });
-    mostrarProductos({ products: filteredProductsBusqueda });
-    // if (filteredProductsBusqueda.length === 0) {
-    //   searchResultsProducto.innerHTML = '<p>No se encontraron resultados</p>';
-    // } else {
-      
-    
+    const nombreLowerCase = item.name.toLowerCase(); /*para búsqueda por nombre*/
+    const descripcionLowerCase = item.description.toLowerCase(); /*para búsqueda por descripción*/
+    return nombreLowerCase.includes(searchTextProducto) || descripcionLowerCase.includes(searchTextProducto);
+  });
+  mostrarProductos({ products: filteredProductsBusqueda });
+  // if (filteredProductsBusqueda.length === 0) {
+  //   searchResultsProducto.innerHTML = '<p>No se encontraron resultados</p>';
+  // } else {
+
+
 }
 
 // Esperar hasta que el contenido del DOM (estructura HTML) esté completamente cargado
@@ -145,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInputProducto.addEventListener('input', () => {
         filtrarbusqueda(data);
       });
+
     })
     // En caso de error en la solicitud o en el manejo de datos, mostrar un mensaje de error en la consola
     .catch((error) => {

@@ -610,22 +610,22 @@ input:focus {
 /* FIN ESTILOS BUSCADOR PRODUCTOS */
 
 /*INICIO ESTILO PRODUCT AUTO*/
-.imagenCars {
+.imagenProductos {
   width: 20vw;
   float: left;
   margin-right: 4%;
 }
 
-.containerCars {
+.containerProductos {
   display: flex;
   flex-direction: column;
 }
 
-.containerCars h4 {
+.containerProductos h4 {
   text-align: center;
 }
 
-.lista-cars {
+.lista-productos {
   text-align: justify;
   color: rgb(84, 84, 84);
 }
@@ -670,3 +670,6 @@ input:focus {
   background-color: rgba(231, 231, 231, 0.534);
 }
 /*FIN ESTILOS PRODUCT AUTOS*/
+
+
+
