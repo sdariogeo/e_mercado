@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+
+.center-login-box{
+
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex-direction: column;
+
+}
+
+.container-popup{
+
+    background-color:#fff;
+    position: absolute;
+    top: 42px;
+    text-align: center;
+    width: 350px;
+    padding: 30px 10px 20px 10px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 35px rgba(0, 0, 0, 0.6);
+    display: none;
+    z-index: 200; /*superpone el container-popup*/
+    
+}
+
+.data-login{
+    text-align: left;    
+}
+
+.data-login label {
+  font-size: 15px;
+  margin-left: 5px;
+  padding-top: 15px;
+  /* padding-bottom: -15px; */
+
+}
+.container-popup .close-btn {
+    position: absolute;
+    right: 30px;
+    top: 35px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  
+  .container-popup .close-btn:hover {
+    color: #3498db;
+
+  }
+  .close-btn::selection{
+
+    background-color: transparent;
+  }
+  
+  .container-popup .text {
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #343a40;
+  }
+  
+  .container-popup form {
+    margin-top: -20px;
+  }
+  
+  .container-popup form .data-login {
+    width: 100%;
+    margin-top: 25px;
+    margin-left: 15px;
+  }
+
+
+#loginbutton {
+    font-family: 'Roboto', sans-serif;
+    background-color:#343a40;
+    color: #fff;
+    padding: 6px 24px;
+    margin: 10px 0px;
+    border: 2px solid#343a40;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 300px;
+    
+  }
+
+#loginbutton:hover{
+
+background-color: #fff;
+color: #343a40;
+
+  }
+
+.container-popup form a:hover  {
+    text-decoration: underline;
+  }
+  
+
+  .forgot-pass{
+
+    margin-top: 20px;
+  }
+
+  .input-signIn {
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1.3px solid #343a40;
+    background: none;
+    width: 90%;
+    margin-top: 18px;
+  }
+  
+  
+  .input-signIn:focus {
+    outline: 4px #acc8fb solid;
+    background-color: #fff;
+    border-bottom: 1.3px solid #3498db;
+  }
+
+  .container-popup form a {
+    color: #3498db;
+  }
+  .container-popup form a:hover {
+    text-decoration: underline;
+  }
+
+  .dropdown-menu{
+
+    width: 100%;
+  }
+  
+
+

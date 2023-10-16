@@ -13,6 +13,7 @@
   <link href="css/product-info.css" rel="stylesheet">
   <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/sign-In.css">
 </head>
 
 <body>
@@ -34,6 +35,10 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" id="botonCrearCuenta" href="login.html" onclick="openForm()">Crear cuenta</a>
+          </li>
+          <li class="nav-item" id="login-nav">
+            <!-- Acá se pone desde el DOM el contenido del login pop up -->
           </li>
         </ul>
       </div>
@@ -63,8 +68,7 @@
     <h5>¡Queremos saber tu opinión!</h5>
     <br>   
     <h6>Añade un comentario:</h6>
-    <textarea type="text" class="comment-control" rows="2" id="commentId">
-    </textarea>
+    <textarea type="text" class="comment-control" rows="2" id="commentId"></textarea>
     <br>
     <label for="score" class="label1">Calificación:</label>
       <select id="commentScore" name="score">
@@ -82,6 +86,11 @@
 
    <div id="comentario-producto">
         <!-- Agrega más elementos para mostrar otros detalles del producto --> 
+    </div>
+
+    <h5 class="title-relatedProducts"> Productos relacionados:</h5>
+    <div id="related-products">
+      
     </div>
 
   </main>
@@ -104,7 +113,8 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
+  <script src="js/login-nav.js"></script>
+  <script src="js/loginValidator.js"></script>
 </body>
 
 </html>
-

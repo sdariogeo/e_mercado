@@ -52,18 +52,19 @@ function showCategoriesList(){
             htmlContentToAppend += `
             <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="divCategoria col-md-3">
                         <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
                     </div>
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${category.name}</h4>
-                            <small class="text-muted">${category.productCount} artículos</small>
+                            <h4 class="nombreCategoria mb-1">${category.name}</h4>
+                            <medium class="cantidadArticulos text-muted">${category.productCount} artículos</medium>
                         </div>
-                        <p class="mb-1">${category.description}</p>
+                        <p class="descripCategoria mb-1">${category.description}</p>
                     </div>
                 </div>
             </div>
+            
             `
         }
 
@@ -207,17 +208,4 @@ function showProductsList(productsArray) {
 }
 
 
-const productsArray = "https://japceibal.github.io/emercado-api/cats_products/"+localStorage.getItem("catID")+".json";
-
-searchInputProducto.addEventListener('input', () => {
-  let searchTextProducto = searchInputProducto.value.toLowerCase();
-
-  let filteredProducts = productsArray.products.filter(product => product.name.toLowerCase().includes(searchTextProducto));
-
-  if (filteredProducts.length === 0) {
-      searchResultsProducto.innerHTML = '';
-      searchResultsProducto.innerHTML = '<p>No se encontraron resultados</p>'; 
-  } else {
-    showProductsList(filteredProducts);
-  }
-}); */
+ */

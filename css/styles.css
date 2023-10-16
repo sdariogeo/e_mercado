@@ -31,189 +31,8 @@ nav a {
   background: transparent;
   border-radius: 6px;
   cursor: pointer;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%); */
+  
 }
-
-.container-popup {
-  /* top: 50%;
-  left: 50%;
-  transform-origin: translate(-50%,-50%);
-  transform: center; */
-  position: relative;
-}
-
-.login-button:active {
-  transform: scale(0.98);
-}
-
-
-.center-login-box {
-  display: flex;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  box-sizing: border-box;
-  transition: all 0.1s ease-out;
-  /* transform: translate(-50%,-50%) scale(1); */
-
-}
-
-.login-button-ckbox {
-  display: none;
-}
-
-.container-popup {
-  display: none;
-  scale: 0;
-  opacity: 0;
-  z-index: -1;
-  background: #fff;
-  width: 410px;
-  padding: 30px;
-  border-radius: 3%;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-out;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -50% 0 0 -50%;
-  transform: translate(-175%, 25%);
-}
-
-#show:checked~.container-popup {
-  display: block;
-  scale: 1;
-  opacity: 1;
-  z-index: 11;
-}
-
-.container-popup .close-btn {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.container-popup .close-btn:hover {
-  color: #3498db;
-}
-
-.container-popup .text {
-  font-size: 35px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.container-popup form {
-  margin-top: -20px;
-  transition: all 0.7s ease;
-}
-
-.container-popup form .data-login {
-  height: 45px;
-  width: 100%;
-  margin: 40px 0;
-}
-
-form .data-login label {
-  font-size: 18px;
-}
-
-form .data-login input {
-  height: 100%;
-  width: 100%;
-  padding-left: 10px;
-  font-size: 17px;
-  border: 1px solid silver;
-}
-
-form .data-login input:focus {
-  border-color: #3498db;
-  border-bottom-width: 2px;
-  animation: barfill 2s ease 0s infinite;
-}
-
-form .forgot-pass {
-  margin-top: -8px;
-}
-
-form .forgot-pass a {
-  color: #3498db;
-  text-decoration: none;
-}
-
-form .forgot-pass a:hover {
-  text-decoration: underline;
-}
-
-form .btn-login {
-  height: 45px;
-  margin: 30px 0;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-
-}
-
-form .btn-login .inner-login {
-  height: 100%;
-  width: 100%;
-  position: center;
-  left: -100%;
-  z-index: -1;
-  transition: all 0.4s;
-}
-
-form .btn-login:hover .inner-login {
-  left: 0;
-}
-
-form .btn-login button {
-  height: 100%;
-  width: 100%;
-  background: none;
-  border: none;
-  color: #fff;
-  background: #11131e;
-  font-size: 18px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  border-radius: 10px;
-  /* overflow: visible;
-  transform: scale(0.98); */
-}
-
-form .signup-link-login a {
-  color: #3498db;
-  text-decoration: none;
-}
-
-form .signup-link-login a:hover {
-  text-decoration: underline;
-}
-
-@keyframes barfill {
-  from {
-    border-bottom-width: 1px;
-  }
-
-  to {
-    border-bottom-width: 100%;
-  }
-}
-
-/*////////FIN BLOQE CSS POP UP LOG IN//////////// */
 
 
 .bd-placeholder-img {
@@ -251,6 +70,13 @@ form .signup-link-login a:hover {
   }
 }
 
+/* Cambiar la imagen de fondo para Mobile */
+/* @media (max-width: 767px) {
+  .jumbotron {
+    background: url('../img/login.png'); 
+  }
+}
+ */
 .jumbotron p:last-child {
   margin-bottom: 0;
 }
@@ -589,6 +415,12 @@ input:focus {
 }
 /* FINAL ESTILO FORM*/
 
+.text-muted{
+  text-align: center;
+}
+
+
+
 /* INICIO ESTILOS BUSCADOR PRODUCTOS */
 
 #search-container-producto {
@@ -610,25 +442,149 @@ input:focus {
 /* FIN ESTILOS BUSCADOR PRODUCTOS */
 
 /*INICIO ESTILO PRODUCT AUTO*/
-.imagenProductos {
-  width: 20vw;
-  float: left;
-  margin-right: 4%;
-}
 
 .containerProductos {
   display: flex;
   flex-direction: column;
 }
 
-.containerProductos h4 {
+.containerProductos h2 {
   text-align: center;
+  margin-top: 15px;
 }
 
-.lista-productos {
+.iconosSort {
+  justify-content: center;
+}
+
+.textoPrecioProducto {
+  margin-top: 14px;
+}
+
+#rangeFilterCountMin {
+  display: flex;
+  margin-top: 14px;
+}
+
+#rangeFilterCountMax {
+  display: flex;
+  margin-top: 14px;
+}
+
+
+
+/* query iconos sort para mobile */
+@media (max-width: 767px) {
+  
+
+  .row.container .col-md {
+    width: 100%;
+    margin-bottom: 8px; /* Ajusta el espaciado entre los elementos */
+  }
+
+  .row.container .btn-group {
+    width: 100%; /* botones ocupan el ancho completo */
+  }
+
+  
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .divFiltro {
+    text-align: right; /* Alinea los botones a la derecha en modo desktop */
+  }
+
+  .textoPrecioProducto {
+    margin-top: 14px;
+    justify-content: right;
+  }
+
+  .iconosSort {
+    justify-content: flex-end !important; /* Centra los iconos horizontalmente */
+  }
+  
+}
+
+
+
+/* .imagenProductos {
+  width: 300px;
+  float: left;
+  margin-right: 4%;
+} */
+
+/* .producto {
+  margin-bottom: 20px; 
+} */
+
+.producto:hover {
+  transform: scale(1.1);
+  animation-duration: 1ms;
+  transition: 0.4s;
+}
+
+/* Ajusta el tamaño de la imagen */
+.imagenProductos {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ajusta el espacio entre los elementos dentro de divTexto */
+.divTexto {
+  padding: 10px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  font-size: 2.4vh;
+  
+}
+
+/* querys para escritorio */
+@media (min-width: 768px) {
+  .divTexto {
+      display: flex;
+      /* flex-direction: row; */
+      justify-content: space-between;
+      align-items: right;
+  }
+
+  /* .divDescripcion,
+  .divVendidos {
+      width: 48%; 
+  } */
+}
+
+
+/* querys para ocultar descripción y cantidad vendidos en mobile */
+@media (max-width: 767px) {
+  .divDescripcion, 
+  .divVendidos {
+    display: none;
+  }
+
+  .divTexto {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* margin-left: 30px; */
+  }
+}
+
+.divNombre {
+  font-size: 3.3vh;
+  /* letter-spacing:0.5vw; */
+  /*la variante que se me ocurre es disminuir el espacio, para darle un toque diferente a la letra*/
+  font-weight: 510;
+  /* margin-right: 10px; */
+}
+
+
+/* .lista-productos {
   text-align: justify;
   color: rgb(84, 84, 84);
-}
+} */
 
 .subtitulo4 {
   margin-top: 2%;
@@ -648,28 +604,21 @@ input:focus {
   font-weight: bold;
 }
 
-.divNombre {
-  font-size: 3.3vh;
-  /* letter-spacing:0.5vw; */
-  /*la variante que se me ocurre es disminuir el espacio, para darle un toque diferente a la letra*/
-  color: rgb(20, 20, 20);
-  font-weight: 510;
-}
 
 
-.divTexto {
-  display: inline-flexbox;
-  text-align: right;
-  font-size: 2.4vh;
-}
 
-.producto:hover {
-  transform: scale(1.1);
-  animation-duration: 1ms;
-  transition: 0.4s;
-  background-color: rgba(231, 231, 231, 0.534);
-}
+
 /*FIN ESTILOS PRODUCT AUTOS*/
 
+/* estilo moon */
 
+.bi-moon{
+  color: white;
+}
 
+/*ESTILOS PARA EL CARRITO DE COMPRAS*/
+.containerResume {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}

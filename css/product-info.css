@@ -1,6 +1,5 @@
 #detalle-producto {
   text-align: center;
-  margin-left: 10%;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -84,6 +83,93 @@ p {font-size: 110%}
   }
 
 .info-producto{
-
 text-align: center;
   }
+
+.image-relatedproducts {
+  width: 280px;
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  height: auto;
+}
+
+.container-relatedproducts{
+
+  flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ margin-left: 20px;
+ margin-right: 20px;
+}
+
+.title-relatedproducts {
+  margin-top: 7px;
+}
+
+#related-products {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.title-relatedProducts {
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+.container-relatedproducts:hover {
+  transform: scale(1.1);
+  animation-duration: 1ms;
+  transition: 0.4s;
+  background-color: rgba(231, 231, 231, 0.534);
+}
+
+/*responsive*/
+
+@media(max-width: 768px) {
+  h1 {
+    font-size: 160%;
+    text-align: center;
+    margin-bottom: 7%;
+  }
+  p {
+    font-size: 85%;
+  }
+  .container {
+    width: 90%;
+  }
+  .carousel-inner{
+    width:100%;
+  }
+  img {
+    width: 100%;
+  }
+  h5 {
+    font-size: 110%;
+  }
+  h6 {
+    font-size: 90%;
+  }
+  .label1{
+    font-size: 90%;
+  }
+  #commentScore {
+    width: 50%;
+  }
+  .container-comentarios p {
+    text-align: left;
+  }
+  #related-products {
+    flex-direction: column;
+    text-align: center;
+  }
+  #related-products img {
+    width: 70%;
+  }
+  .text-muted {
+    text-align: center;
+  }
+}

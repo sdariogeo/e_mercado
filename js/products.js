@@ -19,12 +19,15 @@ function mostrarProductos(data) {
   // Iterar a través de los elementos en el arreglo "products" dentro de los datos
   data.products.forEach((item) => {
     // Generar el fragmento de HTML para mostrar la información del producto
-    listaHtml += `<div class="producto" data-id="${item.id}">
-     <img class="imagenProductos" src=${item.image}>
+    listaHtml += `<div class="producto row" data-id="${item.id}">
+        <div class="divImagen col-md-5">
+          <img class="imagenProductos" src=${item.image}>
+        </div>
 
-        <div class="divTexto">
+
+        <div class="divTexto col-md-6">
             <div class="divNombre">
-                <p class="nombre">${item.name}</p>
+                <p class="nombre mb-0">${item.name}</p>
             </div>
 
             <div class="divDescripcion">
@@ -39,16 +42,22 @@ function mostrarProductos(data) {
                 <p class="vendidos">Vendidos: ${item.soldCount}</p>
             </div>
         </div>
-   </div>
-   <hr>
+    </div>
+    <hr>
+   
       `;
   });
+  
 
   // Obtener el primer elemento con la clase "lista-productos" que fue añadida en products.html
   const listaProductos = document.getElementsByClassName("lista-productos")[0];
 
 // Asignar el HTML generado a la estructura con la clase "lista-productos"
 listaProductos.innerHTML = listaHtml;
+
+// Agregar el HTML generado al contenedor de productos
+document.getElementById("productosContainer").innerHTML = listaHtml;
+           
 
 /////////ENTREGA Nª3 CONSIGNA-1/////////
 
@@ -58,7 +67,6 @@ listaProductos.innerHTML = listaHtml;
   }
 
   const productosDivs = document.querySelectorAll('.producto');
-
   productosDivs.forEach((productoDiv) => {
     productoDiv.addEventListener('click', () => {
       // Acá almaceno en una constante el id del producto

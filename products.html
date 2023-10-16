@@ -11,12 +11,18 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
   <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-
+  <link rel="stylesheet" href="css/sign-In.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
+
 
 <body>
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark p-1"> <!--se deja nav fijo-->
     <div class="container">
+      <div id="p-3 mb-2 bg-light text-dark">
+        <button id="changeTheme" class="btn rounded-fill"> <i class="bi bi-sun"></i> </button><!--se crea para el modo oscuro-->
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,73 +38,80 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item"></li>
+          <li class="nav-item">
+            <a class="nav-link" id="botonCrearCuenta" href="login.html" onclick="openForm()">Crear cuenta</a>
+          </li>
+          <li class="nav-item" id="login-nav">
+            <!-- Acá se pone desde el DOM el contenido del login pop up -->
+          </li>
         </ul>
       </div>
     </div>
   </nav>
   <main class="pb-5 container">
+    
     <div class="container">
       <div class="containerProductos">
-        <div>
-          <h4 class="subtitulo4">Productos</h4>
-        </div>
-        <div class="subtitulo5">Estos son nuestros <span class="autos-negrita">artículos</span> disponibles</div>
-
-        <div id="search-container-producto">
-          <input type="search" id="search-input-producto" placeholder="Buscar...">
-          <div class="search-results-producto" id="search-results-producto"></div>
-        </div>
-
-        <div class="container">
-          <div class="row">
-            <div class="col text-end">
-              <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
-                <input type="radio" class="btn-check" name="options" id="sortAsc">
-                <label class="btn btn-light" for="sortAsc" title="Orden ascendente"><img src="img/inversion.png" alt="sortAsc" width="30"></label>
-                <input type="radio" class="btn-check" name="options" id="sortDesc">
-                <label class="btn btn-light" for="sortDesc" title="Orden descendente"><img src="img/inversion (1).png" alt="sortDesc" width="30"></label>
-                <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
-                <label class="btn btn-light" for="sortByCount" title="Más vendidos"><img src="img/comprar.png" alt="relevancia" width="30"></i></label>
-              </div>
+            <div>
+              <h2 class="mb-1">Productos</h2>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
-              <div class="row container p-0 m-0">
-                <div class="col">
-                  <p class="font-weight-normal text-end my-2">Precio:</p>
-                </div>
-                <div class="col">
-                  <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin" alt="Precio mínimo">
-                </div>
-                <div class="col">
-                  <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax" alt="Precio máximo">
-                </div>
-                <div class="col-3 p-0">
-                  <div class="btn-group" role="group">
-                    <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
-                    <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+            <div class="text-muted">Estos son nuestros <span class="autos-negrita">artículos</span> disponibles</div>
+
+            <div id="search-container-producto">
+              <input type="search" id="search-input-producto" placeholder="Buscar...">
+                <div class="search-results-producto" id="search-results-producto"></div>
+            </div>
+
+            <div class="container">
+              <div class="row">
+                <div class="col text-end iconosSort">
+                  <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+                    <input type="radio" class="btn-check" name="options" id="sortAsc">
+                    <label class="btn btn-light" for="sortAsc" title="Orden ascendente"><img src="img/inversion.png" alt="sortAsc" width="20"></label>
+                    <input type="radio" class="btn-check" name="options" id="sortDesc">
+                    <label class="btn btn-light" for="sortDesc" title="Orden descendente"><img src="img/inversion (1).png" alt="sortDesc" width="20"></label>
+                    <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
+                    <label class="btn btn-light" for="sortByCount" title="Más vendidos"><img src="img/comprar.png" alt="relevancia" width="20"></i></label>
                   </div>
                 </div>
               </div>
+              
+              <div class="row">
+                <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+                  <div class="row container p-0 m-0">
+                    <div class="textoPrecioProducto col-md">
+                      <p class="font-weight-normal text-left my-2">Precio:</p>
+                    </div>
+                    <div class="col-md">
+                      <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin" alt="Precio mínimo">
+                    </div>
+                    <div class="col-md">
+                      <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax" alt="Precio máximo">
+                    </div>
+                    <div class="col-md-2">
+                      <div class="divFiltro btn-group" role="group">
+                        <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
+                        <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="list-group" id="cat-list-container">
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="list-group" id="cat-list-container">
-            </div>
-          </div>
         </div>
-
-      
-        </div>
-        
-        
-       
+      </div>      
         
         <hr class="lineaDivision">
         
-        <div id="container-listado-productos" class="lista-productos"></div>
+        <div id="productosContainer" class="container">
+            <!-- Container Bootstrap para envolver los productos -->
+              <div class="row">
+                  <div id="container-listado-productos" class="lista-productos text-muted"></div>
+              </div>
+          </div>
       </div>
     </div>
   </main>
@@ -124,6 +137,9 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
+  <script src="js/login-nav.js"></script>
+  <script src="js/loginValidator.js"></script>
+  <script src="js/changeTheme.js"></script>
 </body>
 
 </html>
