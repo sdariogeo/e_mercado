@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <br>
       <div class="row">
         <!--INGRESO DE DATOS DE DIRECCIÓN, NÚMERO Y CALLE-->
-        <div class="shippingAddress col-5 mx-auto">
+        <div class="shippingAddress col-6 mx-auto">
           <h4>Dirección de envío</h4>
           <label class="label-calle">Calle</label>
           <div class="invalid-feedback">Debe ingresar una calle</div>
@@ -80,23 +80,23 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
         <!--FORMULARIO DE SELECCIÓN DE TIPO DE ENVÍO-->
-        <div class="form-container col-6 mx-auto pt-5">    
+        <div class="form-container col-5 mx-auto pt-5">    
           <h4>Tipo de envío</h4>
-          <div class="form-check">
+          <div class="form-check d-flex align-items-center mb-3 mt-4">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-            <label class="form-check-label" for="flexRadioDefault1">
-              Premium 2 a 5 días (15%)
+            <label class="form-check-label mt-1" for="flexRadioDefault1">
+               Premium 2 a 5 días (15%)
             </label>
           </div>
-          <div class="form-check">
+          <div class="form-check  d-flex align-items-center mb-3">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-            <label class="form-check-label" for="flexRadioDefault2">
+            <label class="form-check-label mt-1" for="flexRadioDefault2">
               Express 5 a 8 días (7%)
             </label>
           </div>
-          <div class="form-check">
+          <div class="form-check  d-flex align-items-center mb-3">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-            <label class="form-check-label" for="flexRadioDefault3">
+            <label class="form-check-label mt-1" for="flexRadioDefault3">
               Standard 12 a 15 días (5%)
             </label>
           </div>
