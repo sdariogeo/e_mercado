@@ -107,10 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>`;
 
   }
-
    addGraphicsControls();
 
-  const formShipping = document.getElementById('formShipping');
   const btnForm = document.getElementById('comprar');
   const inputCalle = document.getElementById("calle");
   const inputNumero = document.getElementById("numero");
@@ -147,14 +145,14 @@ document.addEventListener("DOMContentLoaded", () => {
             inputEsquina.classList.remove("is-invalid");
             inputEsquina.classList.add("is-valid");
           }
-          const allValid = document.querySelectorAll('.is-valid').length === 3;
-          /* const inputSuccess = document.getElementById("success"); */
 
-          if (allValid) {
+
+          const allValids = document.querySelectorAll('.is-valid').length === 3;
+          if (allValids) {
             success.classList.remove("d-none");
             setTimeout(() => {
             success.classList.add("d-none");
-            }, 3000);
+            }, 4000);
           }
         });
       });
