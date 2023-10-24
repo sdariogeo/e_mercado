@@ -58,17 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Max add: contenido respectivo para hacer los controles gráficos de envío y dirección
   function addGraphicsControls() {
-    const anotherRow = document.createElement('div');
-    const tipoyDireccion = document.getElementById("tipoyDireccion");
-    anotherRow.innerHTML = `
+    const formShipping = document.getElementById("formShipping");
+    formShipping.innerHTML = `
       <br>
       <div class="row">
         <!--INGRESO DE DATOS DE DIRECCIÓN, NÚMERO Y CALLE-->
         <div class="shippingAddress col-5 mx-auto">
           <h4>Dirección de envío</h4>
           <label class="label-calle">Calle</label>
+          <div class="invalid-feedback">Debe ingresar una calle</div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" aria-label="Street name input" aria-describedby="inputGroup-sizing-default">
+            <input type="text" class="form-control" aria-label="Street name input" aria-describedby="inputGroup-sizing-default" required>
           </div>
           <label class="label-numero">Número</label>
           <div class="input-group mb-3">
@@ -103,8 +103,17 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>`;
 
-    tipoyDireccion.appendChild(anotherRow);
   }
 
   addGraphicsControls();
+
+  const formShipping = document.getElementById('formShipping');
+  const btnForm = document.getElementById('comprar');
+
+  btnForm.addEventListener('click', function() {
+    console.log('Se hizo click en el botón de comprar');
+    formShipping.submit();
+  });
+
+  
 });
