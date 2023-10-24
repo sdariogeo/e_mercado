@@ -68,16 +68,19 @@ document.addEventListener("DOMContentLoaded", () => {
           <label class="label-calle">Calle</label>
           <div class="invalid-feedback">Debe ingresar una calle</div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" aria-label="Street name input" aria-describedby="inputGroup-sizing-default" required>
-          </div>
+            <input id="calle" type="text" class="form-control" aria-label="Street name input" aria-describedby="inputGroup-sizing-default" required>
+              <div class="invalid-feedback">Ingresa una calle</div>
+            </div>
           <label class="label-numero">Número</label>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" aria-label="Street number input" aria-describedby="inputGroup-sizing-default">
-          </div>
+            <input id="numero" type="text" class="form-control" aria-label="Street number input" aria-describedby="inputGroup-sizing-default" required>
+              <div class="invalid-feedback">Ingresa un número</div>
+            </div>
           <label class="label-esquina">Esquina</label>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" aria-label="Corner street name input" aria-describedby="inputGroup-sizing-default">
-          </div>
+            <input id="esquina" type="text" class="form-control" aria-label="Corner street name input" aria-describedby="inputGroup-sizing-default" required>
+              <div class="invalid-feedback">Ingresa una esquina</div>
+            </div>
         </div>
         <!--FORMULARIO DE SELECCIÓN DE TIPO DE ENVÍO-->
         <div class="form-container col-5 mx-auto pt-5">    
@@ -105,15 +108,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
-  addGraphicsControls();
+   addGraphicsControls();
 
   const formShipping = document.getElementById('formShipping');
   const btnForm = document.getElementById('comprar');
+  const inputCalle = document.getElementById("calle");
+  const inputNumero = document.getElementById("numero");
+  const inputEsquina = document.getElementById("esquina");
+    
+      btnForm.addEventListener("click", function (e) {
+          e.preventDefault();
+          console.log('Se hizo click en el botón de comprar');
+  
+          let valorCalle= inputCalle.value;
+          let valorNumero = inputNumero.value;
+          let valorEsquina = inputEsquina.value;
+          
+  
+          if (valorCalle == "") {            
+              inputCalle.classList.remove("is-valid");
+              inputCalle.classList.add("is-invalid");
+          } else {
+              inputCalle.classList.remove("is-invalid");
+              inputCalle.classList.add("is-valid");
+          }
 
-  btnForm.addEventListener('click', function() {
-    console.log('Se hizo click en el botón de comprar');
-    formShipping.submit();
-  });
+          if (valorNumero == "") {            
+            inputNumero.classList.remove("is-valid");
+            inputNumero.classList.add("is-invalid");
+          } else {
+            inputNumero.classList.remove("is-invalid");
+            inputNumero.classList.add("is-valid");
+          }
+          if (valorEsquina == "") {            
+            inputEsquina.classList.remove("is-valid");
+            inputEsquina.classList.add("is-invalid");
+          } else {
+            inputEsquina.classList.remove("is-invalid");
+            inputEsquina.classList.add("is-valid");
+          }
+          const allValid = document.querySelectorAll('.is-valid').length === 3;
+          /* const inputSuccess = document.getElementById("success"); */
+
+          if (allValid) {
+            success.classList.remove("d-none");
+            setTimeout(() => {
+            success.classList.add("d-none");
+            }, 3000);
+          }
+        });
+      });
+
 
   
-});
