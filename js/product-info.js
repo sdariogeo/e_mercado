@@ -2,6 +2,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const productId = localStorage.getItem("ID_del_producto");
 
+  
+
   if (productId) {
     // Realizar la solicitud para obtener los detalles del producto
     fetch(`https://japceibal.github.io/emercado-api/products/${productId}.json`)
@@ -16,12 +18,39 @@ document.addEventListener("DOMContentLoaded", function () {
           `;
 
         // Mostrar los detalles del producto en la página
-        const detalleProductoContainer =
-          document.getElementById("detalle-producto");
+        const detalleProductoContainer = document.getElementById("detalle-producto");
         detalleProductoContainer.innerHTML = detalleProductoHTML;
 
-        // hacemos un bucle for-of para poder iterar el array de las imágenes correctamente
-        // Selecciona el contenedor del carrusel
+        const buttonAgregarAlCarrito = document.getElementById("agregarAlCarrito");
+
+        buttonAgregarAlCarrito.addEventListener("click", () => {
+        /* const productId = buttonAgregarAlCarrito.getAttribute("data-product-id"); */
+        agregarProductoAlCarrito(productId, product);
+        });
+
+  function agregarProductoAlCarrito(productId, product) {
+    // Realiza una solicitud Fetch para obtener los detalles del producto
+    fetch(`https://japceibal.github.io/emercado-api/products/${productId}.json`)
+      .then((response) => response.json())
+      .then((product) => {
+        // Recupera el carrito actual desde localStorage o crea uno vacío si no existe
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        // Agrega el producto al carrito
+        carrito.push(product);
+
+        // Guarda el carrito actualizado en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
+        // Notifica al usuario que el producto se agregó al carrito
+        alert("Producto agregado al carrito");
+
+        // Redirige a la página cart.html
+        /* window.location.href = "cart.html"; */
+      });
+  }
+
+      // Selecciona el contenedor del carrusel
         const carruselContainer = document.querySelector(".carousel-inner");
 
         // Variable para rastrear el índice del elemento activo
