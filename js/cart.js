@@ -1,5 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const cartUrl = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
+  const cartUrl =
+    "https://japceibal.github.io/emercado-api/user_cart/25801.json";
+
+  //cambio los input type radio de metodos de pago
+  const radioCreditCard = document.getElementById("credit-card");
+  const radioWideTransfer = document.getElementById("wide-transfer");
+  const cardNumberInput = document.getElementById("card-number");
+  const securityCodeInput = document.getElementById("security-code");
+  const expirationDateInput = document.getElementById("expiration-date");
+  const accountNumberInput = document.getElementById("account-number");
+
+  radioCreditCard.addEventListener("change", function () {
+    if (radioCreditCard.checked) {
+      cardNumberInput.disabled = false;
+      securityCodeInput.disabled = false;
+      expirationDateInput.disabled = false;
+      accountNumberInput.disabled = true;
+    } else {
+      cardNumberInput.disabled = true;
+      securityCodeInput.disabled = true;
+      expirationDateInput.disabled = true;
+      accountNumberInput.disabled = false;
+    }
+  });
+  radioWideTransfer.addEventListener("change", function () {
+    if (radioWideTransfer.checked) {
+      cardNumberInput.disabled = true;
+      securityCodeInput.disabled = true;
+      expirationDateInput.disabled = true;
+      accountNumberInput.disabled = false;
+    } else {
+      cardNumberInput.disabled = false;
+      securityCodeInput.disabled = false;
+      expirationDateInput.disabled = false;
+      accountNumberInput.disabled = true;
+    }
+  });
+
 
   // Realizar la solicitud Fetch para obtener el carrito de compras
   fetch(cartUrl)
@@ -10,17 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
-
       const user = data.user;
       const articles = data.articles;
 
       if (articles.length > 0) {
-
         const carritoElement = document.getElementById("Articulos");
-        const tableBody = carritoElement.querySelector('tbody');
+        const tableBody = carritoElement.querySelector("tbody");
 
         articles.forEach((producto) => {
-          const row = document.createElement('tr');
+          const row = document.createElement("tr");
 
           row.innerHTML = `
             <th scope="row"><img width="50" src="${producto.image}" alt="Imagen del producto"></th>
@@ -33,21 +68,20 @@ document.addEventListener("DOMContentLoaded", () => {
           tableBody.appendChild(row);
 
           // Agregar evento change a cada input de cantidad
-          const cantidadInput = row.querySelector('.cantidadInput');
-          cantidadInput.addEventListener('change', () => {
+          const cantidadInput = row.querySelector(".cantidadInput");
+          cantidadInput.addEventListener("change", () => {
             actualizarPrecio(cantidadInput);
           });
         });
 
         // Función para actualizar subtotal en base al change de cantidad
         function actualizarPrecio(input) {
-          const row = input.closest('tr');
-          const subtotalElement = row.querySelector('.subTotal');
+          const row = input.closest("tr");
+          const subtotalElement = row.querySelector(".subTotal");
           const cantidad = input.value;
-          const costo = row.querySelector('.costo').innerText;
+          const costo = row.querySelector(".costo").innerText;
           subtotalElement.innerText = cantidad * costo;
         }
-        
       } else {
         console.error("El carrito de compras está vacío.");
       }
@@ -58,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Max add: contenido respectivo para hacer los controles gráficos de envío y dirección
   function addGraphicsControls() {
-    const anotherRow = document.createElement('div');
+    const anotherRow = document.createElement("div");
     const tipoyDireccion = document.getElementById("tipoyDireccion");
     anotherRow.innerHTML = `
       <br>
