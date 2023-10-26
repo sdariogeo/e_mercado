@@ -40,7 +40,7 @@ let getJSONData = function(url){
     });
 }
 
-const search_btn = document.getElementById("searchButton");
+/* const search_btn = document.getElementById("searchButton");
 const close_btn = document.getElementById("botoncerrar");
 const search_box_wrap = document.getElementById("div-wrap");
 const input_search = document.getElementById("searchInput");
@@ -53,7 +53,7 @@ search_btn.addEventListener("click", function(){
 close_btn.addEventListener("click", function(){
 	search_box_wrap.classList.remove("active");
 });
-
+ */
 
 /*  */
 

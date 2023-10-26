@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Obtén el carrito desde localStorage
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  
+
+  // Selecciona el elemento donde se mostrará el carrito en cart.html
+  const carritoElement = document.getElementById("Articulos");
+  const tableBody = carritoElement.querySelector("#Articulos tbody");
+
   const cartUrl = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
   // Realizar la solicitud Fetch para obtener el carrito de compras
@@ -10,51 +18,84 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
+      /* const user = data.user; */
+      const articuloDefecto = data.articles;
 
-      const user = data.user;
-      const articles = data.articles;
+      console.log("Productos del carrito de origen:", articuloDefecto);
+  
+      // Itera sobre los productos y agrega individualmente al carrito
+      carrito.forEach((producto) => {
+        articuloDefecto.push(producto);
+      });
+  
+      // Restaura el carrito actualizado en localStorage
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+  
 
-      if (articles.length > 0) {
+      console.log("Carrito actualizado:", carrito);
 
-        const carritoElement = document.getElementById("Articulos");
-        const tableBody = carritoElement.querySelector('tbody');
 
-        articles.forEach((producto) => {
-          const row = document.createElement('tr');
+    
 
-          row.innerHTML = `
-            <th scope="row"><img width="50" src="${producto.image}" alt="Imagen del producto"></th>
-            <td>${producto.name}</td>
-            <td class="costo">${producto.unitCost}</td>
-            <td><input type="number" class="cantidadInput" product-id="${producto.id}" value="${producto.count}" style="width: 50px; text-align: center" min="0"></td>
-            <td>${producto.currency}</td>
-            <td class="subTotal">${producto.unitCost}</td>
-          `;
-          tableBody.appendChild(row);
+  // Verifica si el carrito tiene productos
+  if (carrito.length > 0) {
+    carrito.forEach((producto) => {
+      const row = document.createElement('tr');
 
-          // Agregar evento change a cada input de cantidad
-          const cantidadInput = row.querySelector('.cantidadInput');
-          cantidadInput.addEventListener('change', () => {
-            actualizarPrecio(cantidadInput);
-          });
-        });
+      row.innerHTML = `
+        <th scope="row"><img width="50" src="${producto.image}" alt="Imagen del producto"></th>
+        <td>${producto.name}</td>
+        <td class="costo">${producto.unitCost}</td>
+        <td><input type="number" class="cantidadInput" product-id="${producto.id}" value="${producto.count}" style="width: 50px; text-align: center" min="0"></td>
+        <td>${producto.currency}</td>
+        <td class="subTotal">${producto.unitCost * producto.count}</td>
+        <button class="button-delete" id="button-delete">Borrar</button>
+      `;
+      tableBody.appendChild(row);
 
-        // Función para actualizar subtotal en base al change de cantidad
-        function actualizarPrecio(input) {
-          const row = input.closest('tr');
-          const subtotalElement = row.querySelector('.subTotal');
-          const cantidad = input.value;
-          const costo = row.querySelector('.costo').innerText;
-          subtotalElement.innerText = cantidad * costo;
-        }
-        
-      } else {
-        console.error("El carrito de compras está vacío.");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
+      // Agregar evento change a cada input de cantidad
+      const cantidadInput = row.querySelector('.cantidadInput');
+      cantidadInput.addEventListener('change', () => {
+        actualizarPrecio(cantidadInput);
+      });
+
+      const botonBorrarCarrito = row.querySelector(".button-delete");
+    botonBorrarCarrito.addEventListener("click", () => {
+      borrarArticuloCarrito(producto.id);
     });
+  });
+  } else {
+    console.error("El carrito de compras está vacío.");
+  }
+   
+  // Función para actualizar subtotal en base al cambio de cantidad
+  function actualizarPrecio(input) {
+    const row = input.closest('tr');
+    const subtotalElement = row.querySelector('.subTotal');
+    const cantidad = input.value;
+    const costo = row.querySelector('.costo').innerText;
+    subtotalElement.innerText = cantidad * costo;
+  }
+  
+  function borrarArticuloCarrito(productId){
+    const index = carrito.findIndex((producto) => producto.id === productId);
+  
+  if (index !== -1) {
+    // Elimina articulo del carrito
+    carrito.splice(index, 1);
+    
+    // Elimina la fila correspondiente de la tabla
+    const rows = tableBody.getElementsByTagName('tr');
+    const rowToDelete = rows[index];
+    if (rowToDelete) {
+      rowToDelete.remove();
+    }
+    
+    // Actualiza el carrito en localStorage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+  }
+
 
   // Max add: contenido respectivo para hacer los controles gráficos de envío y dirección
   function addGraphicsControls() {
@@ -107,4 +148,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   addGraphicsControls();
+})
 });
