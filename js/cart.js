@@ -1,6 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
   const cartUrl = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
+
+  //Elementos para el resumen de compra
+  const subTotalCost = document.getElementById('subTotal');
+  const shippingCostLabel = document.getElementById('costoEnvio');
+  const totalCost = document.getElementById('totalCompra');
+
+
+  //funcion para calcular el Subtotal en el resumen de compra
+
+  function summarySubCost(){
+    
+  }
+
+  //Funcion para calcular el envío.
+function calcShipping() {
+
+  let subtotal = parseInt(document.getElementById('subTotalCost').innerText);
+  let shipTypes = document.getElementsByClassName('form-check-input'); 
+  
+    if (shipTypes[0].checked) {
+
+      shippingCost = Math.round(shipTypes[0].value * subtotal);
+    }
+  
+    if (shipTypes[1].checked) {
+  
+      shippingCost = Math.round(shipTypes[1].value * subtotal);
+    }
+  
+    if (shipTypes[2].checked) {
+    
+      shippingCost = Math.round(shipTypes[2].value * subtotal);
+    }
+
+    return shippingCost;
+  
+}
+
   // Realizar la solicitud Fetch para obtener el carrito de compras
   fetch(cartUrl)
     .then((response) => {
@@ -11,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then((data) => {
 
-      const user = data.user;
       const articles = data.articles;
 
       if (articles.length > 0) {
@@ -27,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <td>${producto.name}</td>
             <td class="costo">${producto.unitCost}</td>
             <td><input type="number" class="cantidadInput" product-id="${producto.id}" value="${producto.count}" style="width: 50px; text-align: center" min="0"></td>
-            <td>${producto.currency}</td>
+            <td class="moneda">${producto.currency}</td>
             <td class="subTotal">${producto.unitCost}</td>
           `;
           tableBody.appendChild(row);
@@ -41,11 +78,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Función para actualizar subtotal en base al change de cantidad
         function actualizarPrecio(input) {
+          let conversionValueUSD = 40;
           const row = input.closest('tr');
           const subtotalElement = row.querySelector('.subTotal');
+          const moneda = row.querySelector('.moneda').innerText
           const cantidad = input.value;
           const costo = row.querySelector('.costo').innerText;
-          subtotalElement.innerText = cantidad * costo;
+          if(moneda == "USD"){
+            subtotalElement.innerText = cantidad * costo;
+          } else {
+            subtotalElement.innerText = (cantidad * costo)/conversionValueUSD;
+            moneda.textContent = "USD"
+          }
         }
         
       } else {
@@ -83,19 +127,19 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="form-container col-6 mx-auto pt-5">    
           <h4>Tipo de envío</h4>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked value="0.15">
             <label class="form-check-label" for="flexRadioDefault1">
               Premium 2 a 5 días (15%)
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="0.07">
             <label class="form-check-label" for="flexRadioDefault2">
               Express 5 a 8 días (7%)
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="0.05">
             <label class="form-check-label" for="flexRadioDefault3">
               Standard 12 a 15 días (5%)
             </label>
