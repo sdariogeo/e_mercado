@@ -18,25 +18,20 @@ document.addEventListener("DOMContentLoaded", () => {
 function calcShipping() {
 
   let subtotal = parseInt(document.getElementById('subTotalCost').innerText);
-  let shipTypes = document.getElementsByClassName('form-check-input'); 
-  
+  let shipTypes = document.getElementsByClassName('form-check-input');
     if (shipTypes[0].checked) {
 
       shippingCost = Math.round(shipTypes[0].value * subtotal);
     }
-  
     if (shipTypes[1].checked) {
-  
       shippingCost = Math.round(shipTypes[1].value * subtotal);
     }
-  
     if (shipTypes[2].checked) {
-    
       shippingCost = Math.round(shipTypes[2].value * subtotal);
     }
 
     return shippingCost;
-  
+
 }
 
   // Realizar la solicitud Fetch para obtener el carrito de compras
@@ -91,7 +86,6 @@ function calcShipping() {
             moneda.textContent = "USD"
           }
         }
-        
       } else {
         console.error("El carrito de compras está vacío.");
       }
@@ -124,7 +118,7 @@ function calcShipping() {
           </div>
         </div>
         <!--FORMULARIO DE SELECCIÓN DE TIPO DE ENVÍO-->
-        <div class="form-container col-6 mx-auto pt-5">    
+        <div class="form-container col-6 mx-auto pt-5">
           <h4>Tipo de envío</h4>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked value="0.15">
