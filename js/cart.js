@@ -68,7 +68,7 @@ function sumatoriaTotal(){
       if (articles.length > 0) {
 
         articles.forEach((producto) => {
-          const row = document.createElement('tr');
+          const row = document.createElement("tr");
 
           row.innerHTML = `
             <th scope="row"><img width="50" src="${producto.image}" alt="Imagen del producto"></th>
@@ -81,8 +81,8 @@ function sumatoriaTotal(){
           tableBody.appendChild(row);
 
           // Agregar evento change a cada input de cantidad
-          const cantidadInput = row.querySelector('.cantidadInput');
-          cantidadInput.addEventListener('change', () => {
+          const cantidadInput = row.querySelector(".cantidadInput");
+          cantidadInput.addEventListener("change", () => {
             actualizarPrecio(cantidadInput);
             summarySubCost()
             sumatoriaTotal()
@@ -180,7 +180,7 @@ function sumatoriaTotal(){
   }
    addGraphicsControls();
 
-  const btnForm = document.getElementById('comprar');
+  const btnForm = document.getElementById('Comprar');
   const inputCalle = document.getElementById("calle");
   const inputNumero = document.getElementById("numero");
   const inputEsquina = document.getElementById("esquina");
