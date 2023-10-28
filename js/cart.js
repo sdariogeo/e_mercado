@@ -3,22 +3,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   //Elementos para el resumen de compra
+  const carritoElement = document.getElementById("Articulos");
+  const tableBody = carritoElement.querySelector('tbody');
   const subTotalCost = document.getElementById('subTotal');
   const shippingCostLabel = document.getElementById('costoEnvio');
   const totalCost = document.getElementById('totalCompra');
+  const shipTypes = document.getElementsByClassName('form-check-input');
 
 
   //funcion para calcular el Subtotal en el resumen de compra
 
   function summarySubCost(){
-    
+    const productosCarrito = tableBody.querySelectorAll('tr');
+    let subcost= 0;
+
+    productosCarrito.forEach((fila) => {
+    const subtotalElement= fila.querySelector('.subTotal');
+    const totalcostsimple = parseFloat(subtotalElement.innerText);
+    subcost += totalcostsimple;
+
+    subTotalCost.innerHTML = subcost;
+  })
   }
 
   //Funcion para calcular el envío.
 function calcShipping() {
 
-  let subtotal = parseInt(document.getElementById('subTotalCost').innerText);
-  let shipTypes = document.getElementsByClassName('form-check-input');
+  let subtotal = parseInt(subTotalCost.innerText);
+  let shippingCost = 0;
+
     if (shipTypes[0].checked) {
 
       shippingCost = Math.round(shipTypes[0].value * subtotal);
@@ -30,8 +43,15 @@ function calcShipping() {
       shippingCost = Math.round(shipTypes[2].value * subtotal);
     }
 
-    return shippingCost;
+    shippingCostLabel.innerHTML = shippingCost;
+}
 
+//Funcion para calcular el total 
+
+function sumatoriaTotal(){
+  const sumatoria= parseInt(subTotalCost.value) + parseInt(shippingCostLabel.value);
+  totalCost.innerHTML=sumatoria;
+  console.log(sumatoria)
 }
 
   // Realizar la solicitud Fetch para obtener el carrito de compras
@@ -47,9 +67,6 @@ function calcShipping() {
       const articles = data.articles;
 
       if (articles.length > 0) {
-
-        const carritoElement = document.getElementById("Articulos");
-        const tableBody = carritoElement.querySelector('tbody');
 
         articles.forEach((producto) => {
           const row = document.createElement('tr');
@@ -86,6 +103,16 @@ function calcShipping() {
             moneda.textContent = "USD"
           }
         }
+        summarySubCost()
+        //Eventos para actualizar en tiempo real
+        const selectShip = document.querySelectorAll('input[type="radio"]');
+        selectShip.forEach((radioButton) => {
+          radioButton.addEventListener('change', () => {
+          console.log('El valor seleccionado ha cambiado')
+          calcShipping()
+        });
+        sumatoriaTotal()
+        })
       } else {
         console.error("El carrito de compras está vacío.");
       }
