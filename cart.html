@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>     
+  <title>eMercado - Todo lo que busques está aquí</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -74,10 +74,15 @@
           
         </div>
      </div>
-     <div id="tipoyDireccion">
+     <form action="#" method="get" class="row mt-4 needs-validation" novalidate id="formShipping"> 
         <!--Aqui se insertan el espacio para la direccion y el tipo de envio-->
+     </form>
+
+     <div id="success" class="alert alert-success alert-dismissible fade show col-10 p-5 d-none " role="alert">
+      <h5>¡Has comprado con éxito!</h5>
      </div>
-  <div id="containerResume"class="container mt-5">
+
+   <div id="containerResume"class="container mt-5">
     <h4 class="mb-1"> Resumen del pedido </h4>
       <div id="container resume" class= "list-group d-flex w-100 justify-content-between">  <!-- Container del resumen del pedido-->
         <ul class="list-group list-group-flush">
@@ -92,9 +97,96 @@
           </li>
         </ul>
       </div>
-    <div class="d-flex justify-content-end">
-      <button  id="Comprar" type="submit" class="btn btn-dark mt-4"> Finalizar compra </button>
-    </div>
+      <!--Aquí se inserta la forma de pago-->
+      <div class="card" style="width: 100%;">
+      
+        <div class="card-body">
+          <h5 class="card-title fw-semibold">Forma de pago</h5>
+         
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Seleccionar
+          </button>
+        </div>
+      </div>
+
+<!--Aquí se inserta el modal-->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel"><i class="bi bi-currency-dollar"></i> Forma de pago</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+<!--Aquí se agrega el formulario dentro del modal-->
+              <form action="" class="was-validated">
+
+<!--Aquí se insertan el input type radio, el cual habilita los inputs correspondientes a la opción seleccionada-->
+                <div class="form-check">
+                  <input type="radio" class="form-check-input mt-3" name="radio-stacked" required>
+                  <label class="form-check-label fw-semibold" for="validationFormCheck2">Tarjeta de crédito</label>
+                </div>
+
+                <hr class="border border-secondary border-1 opacity-75">
+              <div class="row">
+
+                <div class="col-sm-6">
+                  <label for="validationCustom01" class="form-label">Número de tarjeta</label>
+                  <input type="number" class="form-control"  value="" required style="margin: 0;">
+                  <div class="valid-feedback">
+                    Completado.
+                  </div>
+                </div>
+                <div class="col-sm-6 ">
+                  <label for="validationCustom02" class="form-label">Código de seg.</label>
+                  <input type="number" class="form-control" value="" required style="margin: 0;">
+                  <div class="valid-feedback">
+                    Completado.
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-sm-6">
+                  <label for="validationCustom02" class="form-label">Vencimiento</label>
+                  <input type="date" class="form-control"  value="" required style="margin: 0;">
+                  <div class="valid-feedback">
+                    Completado.
+                  </div>
+                </div>
+              </div>
+                <hr class="border border-light border-1 opacity-75">
+
+<!--Aquí se insertan el input type radio, el cual habilita el input donde se ingresa el número de cuenta-->
+                <div class="form-check">
+                  <input type="radio" class="form-check-input mt-3" name="radio-stacked" required>
+                  <label class="form-check-label fw-semibold" for="validationFormCheck2">Transferencia bancaria</label>
+                </div>
+                <hr class="border border-secondary border-1 opacity-75">
+
+                <div class="col-sm-6">
+                  <label for="validationCustom02" class="form-label">Número de cuenta</label>
+                  <input type="number" class="form-control"  value="" required style="margin: 0;">
+                  <div class="valid-feedback">
+                    Completado.
+                  </div>
+                </div>
+              </form>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--Fin del modal-->
+
+  </div>
+  <div class="d-flex justify-content-end">
+    <button  id="Comprar" type="submit" class="btn btn-primary mt-4"> Finalizar compra </button>
   </div>
   </main>
   <footer class="text-muted">
@@ -112,7 +204,7 @@
       <div></div>
       <div></div>
     </div>
-  </div>  
+  </div>
   <script src="js/cart.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
