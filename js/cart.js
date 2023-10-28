@@ -43,13 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const row = document.createElement('tr');
 
       row.innerHTML = `
-        <th scope="row"><img width="50" src="${producto.image}" alt="Imagen del producto"></th>
+        <th scope="row"><img width="50" src="${producto.images[0]}" alt="Imagen del producto"></th>
         <td>${producto.name}</td>
-        <td class="costo">${producto.unitCost}</td>
-        <td><input type="number" class="cantidadInput" product-id="${producto.id}" value="${producto.count}" style="width: 50px; text-align: center" min="0"></td>
+        <td class="costo">${producto.cost}</td>
+        <td><input type="number" class="cantidadInput" product-id="${producto.id}" value="1" style="width: 50px; text-align: center" min="0"></td>
         <td>${producto.currency}</td>
-        <td class="subTotal">${producto.unitCost * producto.count}</td>
-        <button class="button-delete" id="button-delete">Borrar</button>
+        <td class="subTotal">${producto.cost}</td>
+        <button class="btn btn-outline-secondary bi bi-trash button-delete" id="button-delete"></button>
       `;
       tableBody.appendChild(row);
 
