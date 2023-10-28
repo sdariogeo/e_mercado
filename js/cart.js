@@ -16,12 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       securityCodeInput.disabled = false;
       expirationDateInput.disabled = false;
       accountNumberInput.disabled = true;
-    } else {
-      cardNumberInput.disabled = true;
-      securityCodeInput.disabled = true;
-      expirationDateInput.disabled = true;
-      accountNumberInput.disabled = false;
-    }
+    } 
   });
   radioWideTransfer.addEventListener("change", function () {
     if (radioWideTransfer.checked) {
@@ -29,12 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       securityCodeInput.disabled = true;
       expirationDateInput.disabled = true;
       accountNumberInput.disabled = false;
-    } else {
-      cardNumberInput.disabled = false;
-      securityCodeInput.disabled = false;
-      expirationDateInput.disabled = false;
-      accountNumberInput.disabled = true;
-    }
+    } 
   });
 
 
@@ -157,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
           let valorCalle= inputCalle.value;
           let valorNumero = inputNumero.value;
           let valorEsquina = inputEsquina.value;
-          let valorCardselect = dividCardselect.value;
+          let valorCardselect = dividCardselect.value; //esto se puede borrar porque no se está usando
           
   
           if (valorCalle == "") {            
@@ -182,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
             inputEsquina.classList.remove("is-invalid");
             inputEsquina.classList.add("is-valid");
           }
-          if((radioCreditCard.checked && cardNumberInput!="" && securityCodeInput!="" && expirationDateInput!="") || (radioCreditCard.checked && accountNumberInput!="")){
+          if((radioCreditCard.checked && cardNumberInput!="" && securityCodeInput!="" && expirationDateInput!="") || (radioWideTransfer.checked && accountNumberInput!="")){
             dividCardselect.classList.remove("is-invalid");
             dividCardselect.classList.add("is-valid");
           } else {
