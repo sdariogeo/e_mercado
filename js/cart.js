@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
    addGraphicsControls();
 
-  const btnForm = document.getElementById('comprar');
+  const btnForm = document.getElementById('Comprar');
   const inputCalle = document.getElementById("calle");
   const inputNumero = document.getElementById("numero");
   const inputEsquina = document.getElementById("esquina");
