@@ -147,6 +147,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputCalle = document.getElementById("calle");
   const inputNumero = document.getElementById("numero");
   const inputEsquina = document.getElementById("esquina");
+  const dividCardselect = document.getElementById("cardselect");
+  
     
       btnForm.addEventListener("click", function (e) {
           e.preventDefault();
@@ -155,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
           let valorCalle= inputCalle.value;
           let valorNumero = inputNumero.value;
           let valorEsquina = inputEsquina.value;
+          let valorCardselect = dividCardselect.value;
           
   
           if (valorCalle == "") {            
@@ -179,9 +182,15 @@ document.addEventListener("DOMContentLoaded", () => {
             inputEsquina.classList.remove("is-invalid");
             inputEsquina.classList.add("is-valid");
           }
+          if((radioCreditCard.checked && cardNumberInput!="" && securityCodeInput!="" && expirationDateInput!="") || (radioCreditCard.checked && accountNumberInput!="")){
+            dividCardselect.classList.remove("is-invalid");
+            dividCardselect.classList.add("is-valid");
+          } else {
+            dividCardselect.classList.remove("is-valid");
+            dividCardselect.classList.add("is-invalid");
+          }
 
-
-          const allValids = document.querySelectorAll('.is-valid').length === 3;
+          const allValids = document.querySelectorAll('.is-valid').length === 4;
           if (allValids) {
             success.classList.remove("d-none");
             setTimeout(() => {
