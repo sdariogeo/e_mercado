@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const shippingCostLabel = document.getElementById('costoEnvio');
   const totalCost = document.getElementById('totalCompra');
   const shipTypes = document.getElementsByClassName('form-check-input');
+  let shippingCost = 0;
 
 
   //funcion para calcular el Subtotal en el resumen de compra
@@ -30,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function calcShipping() {
 
   let subtotal = parseInt(subTotalCost.innerText);
-  let shippingCost = 0;
 
     if (shipTypes[0].checked) {
 
@@ -46,10 +46,10 @@ function calcShipping() {
     shippingCostLabel.innerHTML = shippingCost;
 }
 
-//Funcion para calcular el total 
+//Funcion para calcular el total
 
 function sumatoriaTotal(){
-  const sumatoria= parseInt(subTotalCost.value) + parseInt(shippingCostLabel.value);
+  const sumatoria= parseInt(subTotalCost.innerText) + shippingCost;
   totalCost.innerHTML=sumatoria;
   console.log(sumatoria)
 }
@@ -63,7 +63,6 @@ function sumatoriaTotal(){
       return response.json();
     })
     .then((data) => {
-
       const articles = data.articles;
 
       if (articles.length > 0) {
@@ -85,8 +84,12 @@ function sumatoriaTotal(){
           const cantidadInput = row.querySelector('.cantidadInput');
           cantidadInput.addEventListener('change', () => {
             actualizarPrecio(cantidadInput);
+            summarySubCost()
+            sumatoriaTotal()
           });
+          
         });
+        
 
         // Función para actualizar subtotal en base al change de cantidad
         function actualizarPrecio(input) {
@@ -103,15 +106,18 @@ function sumatoriaTotal(){
             moneda.textContent = "USD"
           }
         }
+
         summarySubCost()
+        sumatoriaTotal()
         //Eventos para actualizar en tiempo real
         const selectShip = document.querySelectorAll('input[type="radio"]');
         selectShip.forEach((radioButton) => {
           radioButton.addEventListener('change', () => {
           console.log('El valor seleccionado ha cambiado')
           calcShipping()
+          sumatoriaTotal()
         });
-        sumatoriaTotal()
+
         })
       } else {
         console.error("El carrito de compras está vacío.");
@@ -148,7 +154,7 @@ function sumatoriaTotal(){
         <div class="form-container col-6 mx-auto pt-5">
           <h4>Tipo de envío</h4>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked value="0.15">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="0.15">
             <label class="form-check-label" for="flexRadioDefault1">
               Premium 2 a 5 días (15%)
             </label>
