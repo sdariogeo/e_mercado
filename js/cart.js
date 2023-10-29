@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="0.05">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="0.05" checked>
             <label class="form-check-label" for="flexRadioDefault3">
               Standard 12 a 15 días (5%)
             </label>
