@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
             inputEsquina.classList.remove("is-invalid");
             inputEsquina.classList.add("is-valid");
           }
-          if((radioCreditCard.checked && cardNumberInput!="" && securityCodeInput!="" && expirationDateInput!="") || (radioWideTransfer.checked && accountNumberInput!="")){
+          if((radioCreditCard.checked && cardNumberInput.value!="" && securityCodeInput.value !="" && expirationDateInput.value !="") || (radioWideTransfer.checked && accountNumberInput.value !="")){
             dividCardselect.classList.remove("is-invalid");
             dividCardselect.classList.add("is-valid");
           } else {
