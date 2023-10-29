@@ -183,8 +183,14 @@ document.addEventListener("DOMContentLoaded", () => {
           const allValids = document.querySelectorAll('.is-valid').length === 4;
           if (allValids) {
             success.classList.remove("d-none");
+            success.style.position = "absolute";
+            success.style.top = "600px"; 
+            success.style.zIndex = "100";
             setTimeout(() => {
             success.classList.add("d-none");
+            success.style.position = "absolute";
+            success.style.top = "600px"; 
+            success.style.zIndex = "100";
             }, 4000);
           }
         });
