@@ -11,26 +11,51 @@ document.addEventListener("DOMContentLoaded", () => {
   const shipTypes = document.getElementsByClassName('form-check-input');
   let shippingCost = 0;
 
+  //cambio los input type radio de metodos de pago
+  const radioCreditCard = document.getElementById("credit-card");
+  const radioWideTransfer = document.getElementById("wide-transfer");
+  const cardNumberInput = document.getElementById("card-number");
+  const securityCodeInput = document.getElementById("security-code");
+  const expirationDateInput = document.getElementById("expiration-date");
+  const accountNumberInput = document.getElementById("account-number");
+
+  radioCreditCard.addEventListener("change", function () {
+    if (radioCreditCard.checked) {
+      cardNumberInput.disabled = false;
+      securityCodeInput.disabled = false;
+      expirationDateInput.disabled = false;
+      accountNumberInput.disabled = true;
+    }
+  });
+  radioWideTransfer.addEventListener("change", function () {
+    if (radioWideTransfer.checked) {
+      cardNumberInput.disabled = true;
+      securityCodeInput.disabled = true;
+      expirationDateInput.disabled = true;
+      accountNumberInput.disabled = false;
+    }
+  });
+
 
   //funcion para calcular el Subtotal en el resumen de compra
 
-  function summarySubCost(){
+  function summarySubCost() {
     const productosCarrito = tableBody.querySelectorAll('tr');
-    let subcost= 0;
+    let subcost = 0;
 
     productosCarrito.forEach((fila) => {
-    const subtotalElement= fila.querySelector('.subTotal');
-    const totalcostsimple = parseFloat(subtotalElement.innerText);
-    subcost += totalcostsimple;
+      const subtotalElement = fila.querySelector('.subTotal');
+      const totalcostsimple = parseFloat(subtotalElement.innerText);
+      subcost += totalcostsimple;
 
-    subTotalCost.innerHTML = subcost;
-  })
+      subTotalCost.innerHTML = subcost;
+    })
   }
 
   //Funcion para calcular el envío.
-function calcShipping() {
+  function calcShipping() {
 
-  let subtotal = parseInt(subTotalCost.innerText);
+    let subtotal = parseInt(subTotalCost.innerText);
 
     if (shipTypes[0].checked) {
 
@@ -44,15 +69,15 @@ function calcShipping() {
     }
 
     shippingCostLabel.innerHTML = shippingCost;
-}
+  }
 
-//Funcion para calcular el total
+  //Funcion para calcular el total
 
-function sumatoriaTotal(){
-  const sumatoria= parseInt(subTotalCost.innerText) + shippingCost;
-  totalCost.innerHTML=sumatoria;
-  console.log(sumatoria)
-}
+  function sumatoriaTotal() {
+    const sumatoria = parseInt(subTotalCost.innerText) + shippingCost;
+    totalCost.innerHTML = sumatoria;
+    console.log(sumatoria)
+  }
 
   // Realizar la solicitud Fetch para obtener el carrito de compras
   fetch(cartUrl)
@@ -87,9 +112,9 @@ function sumatoriaTotal(){
             summarySubCost()
             sumatoriaTotal()
           });
-          
+
         });
-        
+
 
         // Función para actualizar subtotal en base al change de cantidad
         function actualizarPrecio(input) {
@@ -99,10 +124,10 @@ function sumatoriaTotal(){
           const moneda = row.querySelector('.moneda').innerText
           const cantidad = input.value;
           const costo = row.querySelector('.costo').innerText;
-          if(moneda == "USD"){
+          if (moneda == "USD") {
             subtotalElement.innerText = cantidad * costo;
           } else {
-            subtotalElement.innerText = (cantidad * costo)/conversionValueUSD;
+            subtotalElement.innerText = (cantidad * costo) / conversionValueUSD;
             moneda.textContent = "USD"
           }
         }
@@ -113,10 +138,10 @@ function sumatoriaTotal(){
         const selectShip = document.querySelectorAll('input[type="radio"]');
         selectShip.forEach((radioButton) => {
           radioButton.addEventListener('change', () => {
-          console.log('El valor seleccionado ha cambiado')
-          calcShipping()
-          sumatoriaTotal()
-        });
+            console.log('El valor seleccionado ha cambiado')
+            calcShipping()
+            sumatoriaTotal()
+          });
 
         })
       } else {
@@ -178,55 +203,69 @@ function sumatoriaTotal(){
       </div>`;
 
   }
-   addGraphicsControls();
+  addGraphicsControls();
 
   const btnForm = document.getElementById('Comprar');
   const inputCalle = document.getElementById("calle");
   const inputNumero = document.getElementById("numero");
   const inputEsquina = document.getElementById("esquina");
-    
-      btnForm.addEventListener("click", function (e) {
-          e.preventDefault();
-          console.log('Se hizo click en el botón de comprar');
-  
-          let valorCalle= inputCalle.value;
-          let valorNumero = inputNumero.value;
-          let valorEsquina = inputEsquina.value;
-          
-  
-          if (valorCalle == "") {            
-              inputCalle.classList.remove("is-valid");
-              inputCalle.classList.add("is-invalid");
-          } else {
-              inputCalle.classList.remove("is-invalid");
-              inputCalle.classList.add("is-valid");
-          }
-
-          if (valorNumero == "") {            
-            inputNumero.classList.remove("is-valid");
-            inputNumero.classList.add("is-invalid");
-          } else {
-            inputNumero.classList.remove("is-invalid");
-            inputNumero.classList.add("is-valid");
-          }
-          if (valorEsquina == "") {            
-            inputEsquina.classList.remove("is-valid");
-            inputEsquina.classList.add("is-invalid");
-          } else {
-            inputEsquina.classList.remove("is-invalid");
-            inputEsquina.classList.add("is-valid");
-          }
+  const dividCardselect = document.getElementById("cardselect");
 
 
-          const allValids = document.querySelectorAll('.is-valid').length === 3;
-          if (allValids) {
-            success.classList.remove("d-none");
-            setTimeout(() => {
-            success.classList.add("d-none");
-            }, 4000);
-          }
-        });
-      });
+  btnForm.addEventListener("click", function (e) {
+    e.preventDefault();
+    console.log('Se hizo click en el botón de comprar');
+
+    let valorCalle = inputCalle.value;
+    let valorNumero = inputNumero.value;
+    let valorEsquina = inputEsquina.value;
+    let valorCardselect = dividCardselect.value; //esto se puede borrar porque no se está usando
 
 
-  
+    if (valorCalle == "") {
+      inputCalle.classList.remove("is-valid");
+      inputCalle.classList.add("is-invalid");
+    } else {
+      inputCalle.classList.remove("is-invalid");
+      inputCalle.classList.add("is-valid");
+    }
+
+    if (valorNumero == "") {
+      inputNumero.classList.remove("is-valid");
+      inputNumero.classList.add("is-invalid");
+    } else {
+      inputNumero.classList.remove("is-invalid");
+      inputNumero.classList.add("is-valid");
+    }
+    if (valorEsquina == "") {
+      inputEsquina.classList.remove("is-valid");
+      inputEsquina.classList.add("is-invalid");
+    } else {
+      inputEsquina.classList.remove("is-invalid");
+      inputEsquina.classList.add("is-valid");
+    }
+    if ((radioCreditCard.checked && cardNumberInput.value != "" && securityCodeInput.value != "" && expirationDateInput.value != "") || (radioWideTransfer.checked && accountNumberInput.value != "")) {
+      dividCardselect.classList.remove("is-invalid");
+      dividCardselect.classList.add("is-valid");
+    } else {
+      dividCardselect.classList.remove("is-valid");
+      dividCardselect.classList.add("is-invalid");
+    }
+
+    const allValids = document.querySelectorAll('.is-valid').length === 4;
+    if (allValids) {
+      success.classList.remove("d-none");
+      success.style.position = "absolute";
+      success.style.top = "600px";
+      success.style.zIndex = "100";
+      setTimeout(() => {
+        success.classList.add("d-none");
+        success.style.position = "absolute";
+        success.style.top = "600px";
+        success.style.zIndex = "100";
+      }, 4000);
+    }
+  });
+});
+
+
