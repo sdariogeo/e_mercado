@@ -66,24 +66,28 @@
         <h2>Perfil</h2>
         <p class="lead"></p>
     </div>
+
+
+    <form  class="was-validated">
     <div class="row">
+
       <!--INGRESO INFO COLUMNA 1 OBLIGATORIO-->
       <hr>
       <div class="shippingAddress col-6 mx-auto pt-3 pb-5">
         <label class="label-calle">Primer nombre*</label>
         <div class="invalid-feedback">Primer nombre*</div>
         <div class="input-group mb-3">
-          <input id="Primer Nombre" type="text" class="form-control" aria-label="Street name input" aria-describedby="inputGroup-sizing-default" required>
+          <input id="PrimerNombre" type="text" class="form-control" aria-label="Street name input" aria-describedby="inputGroup-sizing-default" required>
             <div class="invalid-feedback">Ingresa tu Primer Nombre</div>
           </div>
         <label class="label-numero">Primer Apellido*</label>
         <div class="input-group mb-3">
-          <input id="Primer Apellido" type="text" class="form-control" aria-label="Street number input" aria-describedby="inputGroup-sizing-default" required>
+          <input id="PrimerApellido" type="text" class="form-control" aria-label="Street number input" aria-describedby="inputGroup-sizing-default" required>
             <div class="invalid-feedback">Ingresa tu Primer Apellido</div>
           </div>
         <label class="label-esquina">E-mail*</label>
         <div class="input-group mb-3">
-          <input  id="E-mail" type="text" class="form-control" aria-label="Corner street name input" aria-describedby="inputGroup-sizing-default" required>
+          <input  id="emailProfile" type="text" class="form-control" aria-label="Corner street name input" aria-describedby="inputGroup-sizing-default" required>
             <div class="invalid-feedback">Ingresa un E-mail</div>
           </div>
       </div>
@@ -92,12 +96,12 @@
           <label class="label-calle">Segundo Nombre</label>
           <div class="invalid-feedback">Segundo Nombre*</div>
           <div class="input-group mb-3">
-            <input id="Segundo Nombre" type="text" class="form-control" aria-label="Street name input" aria-describedby="inputGroup-sizing-default">
+            <input id="SegundoNombre" type="text" class="form-control" aria-label="Street name input" aria-describedby="inputGroup-sizing-default">
               <div class="invalid-feedback">Ingresa tu Segundo Nombre</div>
             </div>
           <label class="label-numero">Segundo Apellido</label>
           <div class="input-group mb-3">
-            <input id="Segundo Apellido" type="text" class="form-control" aria-label="Street number input" aria-describedby="inputGroup-sizing-default">
+            <input id="SegundoApellido" type="text" class="form-control" aria-label="Street number input" aria-describedby="inputGroup-sizing-default">
               <div class="invalid-feedback">Ingresa tu Segundo Apellido</div>
             </div>
           <label class="label-esquina">Telefono de Contacto</label>
@@ -105,13 +109,13 @@
             <input id="Telefono" type="text" class="form-control" aria-label="Corner street name input" aria-describedby="inputGroup-sizing-default">
               <div class="invalid-feedback">Ingresa un Telefono de Contacto</div>
             </div>
-        </div>
+        </div>      
         <hr>
-
         <div class="d-flex justify-content-end">
-          <button  id="Comprar" type="submit" class="btn btn-primary mt-4"> Guardar Cambios </button>
+          <button  id="saveChanges" type="submit" class="btn btn-primary mt-4"> Guardar Cambios </button>
         </div>
     </div>
+  </form>
    
 
 
