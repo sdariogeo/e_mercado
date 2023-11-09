@@ -26,26 +26,38 @@ telefono.value = valorTelefono;
 
 //Para almacenar la imagen debo pasarla a base64
 const imagenPerfil = document.getElementById("ImagenPerfil");
-
+const valorImagen = localStorage.getItem("imagenPerfil");
+const imageTag = document.getElementById("imgProfile");
+imageTag.src = valorImagen;
+console.log(valorImagen); 
 imagenPerfil.addEventListener("change", function () {
     // Lee el archivo seleccionado como una cadena base64
     const archivo = this.files[0];
     const lector = new FileReader();
-
+    
     lector.onloadend = function () {
       // Almacenar la cadena base64 en el localStorage
-      localStorage.setItem("imagenBase64", lector.result);
+      
+    imageTag.src = lector.result;
+
+     localStorage.setItem("imagenPerfil", lector.result);
     };
 
     if (archivo) {
       lector.readAsDataURL(archivo);
     }
+
+   
+
+        
+    
+});
+
+    
 });
 
 
 
-
-});
 
 
 
