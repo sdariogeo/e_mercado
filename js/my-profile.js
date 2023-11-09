@@ -24,37 +24,28 @@ const telefono = document.getElementById("Telefono");
 const valorTelefono = localStorage.getItem("telefono");
 telefono.value = valorTelefono;
 
+//Para almacenar la imagen debo pasarla a base64
+const imagenPerfil = document.getElementById("ImagenPerfil");
+
+imagenPerfil.addEventListener("change", function () {
+    // Lee el archivo seleccionado como una cadena base64
+    const archivo = this.files[0];
+    const lector = new FileReader();
+
+    lector.onloadend = function () {
+      // Almacenar la cadena base64 en el localStorage
+      localStorage.setItem("imagenBase64", lector.result);
+    };
+
+    if (archivo) {
+      lector.readAsDataURL(archivo);
+    }
+});
+
+
 
 
 });
-// CARGAR LOS DATOS DESDE LOCAL STORAGE
-/*function loadSavedData () {
-    
-    if (Email.value == ) {
-        loginbutton.addEventListener('click', (event) => {
-            event.preventDefault();
-            // Verifica si el usuario ya está logueado
-            if (localStorage.getItem("logueado") && longinbuttonlabel.textContent === "Iniciar sesión") {
-                // Realiza el proceso de cierre de sesión
-                logout();
-                containerPopup.style.display = 'block';
-            } else {
-                login();
-                
-            }
-        });
-    }
-};*/
-
-
-
-
-
-
-
-
-
-
 
 
 
