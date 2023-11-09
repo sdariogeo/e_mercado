@@ -55,6 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Elimina el estado de inicio de sesión del almacenamiento local
         localStorage.removeItem("logueado");
         localStorage.removeItem("email");
+        localStorage.removeItem("primerNombre");
+        localStorage.removeItem("primerApellido");
+        localStorage.removeItem("segundoNombre");
+        localStorage.removeItem("segundoApellido");
+        localStorage.removeItem("telefono");
 
         // Actualiza la etiqueta del botón por inicio de sesión
         longinbuttonlabel.textContent = "Iniciar sesión";
@@ -87,8 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Realiza el proceso de cierre de sesión
                     logout();
                     containerPopup.style.display = 'block';
+                   
                 } else {
                     login();
+
                 }
             });
         }
@@ -99,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (localStorage.getItem("logueado")) {
             // El usuario ya está logueado, cerrar sesión
             logout();
+            window.location.href = 'index.html';
         } else {
             // Mostrar el formulario de inicio de sesión
             containerPopup.style.display = 'block';

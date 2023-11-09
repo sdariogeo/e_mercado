@@ -1,9 +1,61 @@
 // Colocar en el input el valord el local storage
 document.addEventListener("DOMContentLoaded", function() {
 const Email = document.getElementById("emailProfile");
-const valorLocalStorage = localStorage.getItem("email");
-Email.value = valorLocalStorage;
+const valorEmail = localStorage.getItem("email");
+Email.value = valorEmail;
+
+const primerNombre = document.getElementById("PrimerNombre");
+const valorPrimerNombre = localStorage.getItem("primerNombre");
+primerNombre.value = valorPrimerNombre;
+
+const primerApellido = document.getElementById("PrimerApellido");
+const valorPrimerApellido = localStorage.getItem("primerApellido");
+primerApellido.value = valorPrimerApellido;
+
+const segundoNombre = document.getElementById("SegundoNombre");
+const valorSegundoNombre = localStorage.getItem("segundoNombre");
+segundoNombre.value =valorSegundoNombre;
+
+const segundoApellido = document.getElementById("SegundoApellido");
+const valorSegundoApellido = localStorage.getItem("segundoApellido");
+segundoApellido.value = valorSegundoApellido;
+
+const telefono = document.getElementById("Telefono");
+const valorTelefono = localStorage.getItem("telefono");
+telefono.value = valorTelefono;
+
+
+
 });
+// CARGAR LOS DATOS DESDE LOCAL STORAGE
+/*function loadSavedData () {
+    
+    if (Email.value == ) {
+        loginbutton.addEventListener('click', (event) => {
+            event.preventDefault();
+            // Verifica si el usuario ya está logueado
+            if (localStorage.getItem("logueado") && longinbuttonlabel.textContent === "Iniciar sesión") {
+                // Realiza el proceso de cierre de sesión
+                logout();
+                containerPopup.style.display = 'block';
+            } else {
+                login();
+                
+            }
+        });
+    }
+};*/
+
+
+
+
+
+
+
+
+
+
+
 
 
 // GUARDAR DATOS EN EL LOCAL STORAGE
@@ -30,7 +82,8 @@ function guardarCambios() {
     }
 }
     const guardar = document.getElementById("saveChanges");
-    guardar.addEventListener("click",() => {
+    guardar.addEventListener("click",(e) => {
+        e.preventDefault();
     guardarCambios();
    
 });
