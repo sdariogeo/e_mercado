@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem("segundoApellido");
         localStorage.removeItem("telefono");
         localStorage.removeItem("password");
+        localStorage.removeItem("imagenPerfil");
 
         // Actualiza la etiqueta del botón por inicio de sesión
         longinbuttonlabel.textContent = "Iniciar sesión";

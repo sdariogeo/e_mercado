@@ -28,8 +28,11 @@ telefono.value = valorTelefono;
 const imagenPerfil = document.getElementById("ImagenPerfil");
 const valorImagen = localStorage.getItem("imagenPerfil");
 const imageTag = document.getElementById("imgProfile");
-imageTag.src = valorImagen;
-console.log(valorImagen); 
+
+if (valorImagen !== null) {
+    imageTag.src = valorImagen
+};
+ 
 imagenPerfil.addEventListener("change", function () {
     // Lee el archivo seleccionado como una cadena base64
     const archivo = this.files[0];
@@ -46,19 +49,8 @@ imagenPerfil.addEventListener("change", function () {
     if (archivo) {
       lector.readAsDataURL(archivo);
     }
-
-   
-
-        
-    
 });
-
-    
 });
-
-
-
-
 
 
 // GUARDAR DATOS EN EL LOCAL STORAGE
