@@ -3,8 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   //Elementos para el resumen de compra
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
   const carritoElement = document.getElementById("Articulos");
-  const tableBody = carritoElement.querySelector('tbody');
+  const tableBody = carritoElement.querySelector("#Articulos tbody");
   const subTotalCost = document.getElementById('subTotal');
   const shippingCostLabel = document.getElementById('costoEnvio');
   const totalCost = document.getElementById('totalCompra');
@@ -26,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
       expirationDateInput.disabled = false;
       accountNumberInput.disabled = true;
     }
+    summarySubCost();
+    sumatoriaTotal();
+    calcShipping();
   });
   radioWideTransfer.addEventListener("change", function () {
     if (radioWideTransfer.checked) {
@@ -34,6 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
       expirationDateInput.disabled = true;
       accountNumberInput.disabled = false;
     }
+    summarySubCost();
+    sumatoriaTotal();
+    calcShipping();
   });
 
 
@@ -69,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     shippingCostLabel.innerHTML = shippingCost;
+    
   }
 
   //Funcion para calcular el total
@@ -88,69 +96,107 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
-      const articles = data.articles;
+      /* const user = data.user; */
+      const articuloDefecto = data.articles;
 
-      if (articles.length > 0) {
+      console.log("Productos del carrito de origen:", articuloDefecto);
+  
+      // Itera sobre los productos y agrega individualmente al carrito
+      carrito.forEach((producto) => {
+        articuloDefecto.push(producto);
+      });
+  
+      // Restaura el carrito actualizado en localStorage
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+  
 
-        articles.forEach((producto) => {
-          const row = document.createElement("tr");
-
-          row.innerHTML = `
-            <th scope="row"><img width="50" src="${producto.image}" alt="Imagen del producto"></th>
-            <td>${producto.name}</td>
-            <td class="costo">${producto.unitCost}</td>
-            <td><input type="number" class="cantidadInput" product-id="${producto.id}" value="${producto.count}" style="width: 50px; text-align: center" min="0"></td>
-            <td class="moneda">${producto.currency}</td>
-            <td class="subTotal">${producto.unitCost}</td>
-          `;
-          tableBody.appendChild(row);
-
-          // Agregar evento change a cada input de cantidad
-          const cantidadInput = row.querySelector(".cantidadInput");
-          cantidadInput.addEventListener("change", () => {
-            actualizarPrecio(cantidadInput);
-            summarySubCost()
-            sumatoriaTotal()
-          });
-
-        });
+      console.log("Carrito actualizado:", carrito);
 
 
-        // Función para actualizar subtotal en base al change de cantidad
-        function actualizarPrecio(input) {
-          let conversionValueUSD = 40;
-          const row = input.closest('tr');
-          const subtotalElement = row.querySelector('.subTotal');
-          const moneda = row.querySelector('.moneda').innerText
-          const cantidad = input.value;
-          const costo = row.querySelector('.costo').innerText;
-          if (moneda == "USD") {
-            subtotalElement.innerText = cantidad * costo;
-          } else {
-            subtotalElement.innerText = (cantidad * costo) / conversionValueUSD;
-            moneda.textContent = "USD"
-          }
-        }
+    
 
+  // Verifica si el carrito tiene productos
+  if (carrito.length > 0) {
+    carrito.forEach((producto) => {
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <th scope="row"><img width="50" src="${producto.images[0]}" alt="Imagen del producto"></th>
+        <td>${producto.name}</td>
+        <td class="costo">${producto.cost}</td>
+        <td><input type="number" class="cantidadInput" product-id="${producto.id}" value="1" style="width: 50px; text-align: center" min="0"></td>
+        <td class="moneda">${producto.currency}</td>
+        <td class="subTotal">${producto.cost}</td>
+        <button class="btn btn-outline-secondary bi bi-trash button-delete" id="button-delete"></button>
+      `;
+      tableBody.appendChild(row);
+
+      // Agregar evento change a cada input de cantidad
+      const cantidadInput = row.querySelector('.cantidadInput');
+      cantidadInput.addEventListener('change', () => {
+        actualizarPrecio(cantidadInput);
         summarySubCost()
         sumatoriaTotal()
-        //Eventos para actualizar en tiempo real
-        const selectShip = document.querySelectorAll('input[type="radio"]');
-        selectShip.forEach((radioButton) => {
-          radioButton.addEventListener('change', () => {
-            console.log('El valor seleccionado ha cambiado')
-            calcShipping()
-            sumatoriaTotal()
-          });
+        calcShipping()
+      });
 
-        })
-      } else {
-        console.error("El carrito de compras está vacío.");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
+      const botonBorrarCarrito = row.querySelector(".button-delete");
+    botonBorrarCarrito.addEventListener("click", () => {
+      borrarArticuloCarrito(producto.id);
     });
+  });
+  } else {
+    console.error("El carrito de compras está vacío.");
+  }
+
+  // Función para actualizar subtotal en base al cambio de cantidad
+  function actualizarPrecio(input) {
+    let conversionValueUSD = 40;
+    const row = input.closest('tr');
+    const subtotalElement = row.querySelector('.subTotal');
+    const monedaElement = row.querySelector('.moneda');
+    const moneda = monedaElement.innerText;
+    const cantidad = input.value;
+    const costo = row.querySelector('.costo').innerText;
+    if (moneda == "USD") {
+      subtotalElement.innerText = cantidad * costo;
+    } else {
+      subtotalElement.innerText = (cantidad * costo) / conversionValueUSD;
+      monedaElement.innerText = "USD";
+    }
+    
+    
+    
+  
+    summarySubCost()
+    sumatoriaTotal()
+    calcShipping()
+  };
+  
+  
+  
+  function borrarArticuloCarrito(productId){
+    const index = carrito.findIndex((producto) => producto.id === productId);
+  
+  if (index !== -1) {
+    // Elimina articulo del carrito
+    carrito.splice(index, 1);
+    
+    // Elimina la fila correspondiente de la tabla
+    const rows = tableBody.getElementsByTagName('tr');
+    const rowToDelete = rows[index];
+    if (rowToDelete) {
+      rowToDelete.remove();
+    }
+    
+    // Actualiza el carrito en localStorage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    
+  summarySubCost();
+    sumatoriaTotal();
+    calcShipping();
+  }
+  }
 
   // Max add: contenido respectivo para hacer los controles gráficos de envío y dirección
   function addGraphicsControls() {
@@ -204,6 +250,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
   addGraphicsControls();
+  summarySubCost();
+    sumatoriaTotal();
+    calcShipping();
 
   const btnForm = document.getElementById('Comprar');
   const inputCalle = document.getElementById("calle");
@@ -266,6 +315,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 4000);
     }
   });
+});
+
 });
 
 
