@@ -50,7 +50,7 @@ function mostrarProductos(data) {
   
 
   // Obtener el primer elemento con la clase "lista-productos" que fue añadida en products.html
-  const listaProductos = document.getElementsByClassName("lista-productos")[0];
+  const listaProductos = document.getElementsByClassName("search-results-producto");
 
 // Asignar el HTML generado a la estructura con la clase "lista-productos"
 listaProductos.innerHTML = listaHtml;
@@ -108,6 +108,17 @@ function filtrar(data) {
 
   // Luego de filtrar, mostrar los productos filtrados
   mostrarProductos({ products: filteredProducts });
+
+  // Clear previous messages
+  
+
+  if (filteredProducts.length === 0) {
+    // Show a message when no products match the filtering criteria
+    searchResultsProducto.innerHTML = '<p>No se encontraron productos con los criterios de filtrado.</p>';
+  } else {
+    // Show the filtered products
+    searchResultsProducto.innerHTML = '';
+  }
 }
 
 // Función para limpiar el contenido de los rangos
@@ -125,11 +136,13 @@ function filtrarbusqueda(data) {
     return nombreLowerCase.includes(searchTextProducto) || descripcionLowerCase.includes(searchTextProducto);
   });
   mostrarProductos({ products: filteredProductsBusqueda });
-  // if (filteredProductsBusqueda.length === 0) {
-  //   searchResultsProducto.innerHTML = '<p>No se encontraron resultados</p>';
-  // } else {
-
-
+  if (filteredProductsBusqueda.length === 0) {
+    searchResultsProducto.innerHTML = '<p>No se encontraron resultados</p>';
+  } else {
+    // Clear the searchResultsProducto element when there are results
+    searchResultsProducto.innerHTML = '';
+   
+  }
 }
 
 // Esperar hasta que el contenido del DOM (estructura HTML) esté completamente cargado
