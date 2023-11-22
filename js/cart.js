@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const shippingCostLabel = document.getElementById('costoEnvio');
   const totalCost = document.getElementById('totalCompra');
   const shipTypes = document.getElementsByClassName('form-check-input');
+  const conversionValueUSD = 40;
   let shippingCost = 0;
 
   //cambio los input type radio de metodos de pago
@@ -44,6 +45,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
+  // Agregar evento change a cada tipo de envio
+  const formShipping = document.getElementById("formShipping");
+  
+  formShipping.addEventListener("change", function () {
+  // Llama a las funciones necesarias para actualizar el resumen
+  summarySubCost();
+  sumatoriaTotal();
+  calcShipping();
+});
+
+
   //funcion para calcular el Subtotal en el resumen de compra
 
   function summarySubCost() {
@@ -52,11 +64,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     productosCarrito.forEach((fila) => {
       const subtotalElement = fila.querySelector('.subTotal');
+      const monedaElement = fila.querySelector('.moneda');
       const totalcostsimple = parseFloat(subtotalElement.innerText);
-      subcost += totalcostsimple;
-
-      subTotalCost.innerHTML = subcost;
-    })
+  
+      // Convertir a dólares si la moneda original es USD
+      if (monedaElement.innerText === "USD") {
+        subcost += totalcostsimple;
+      } else {
+        subcost += totalcostsimple / conversionValueUSD;
+      }
+    });
+  
+    // Mostrar el subtotal en dólares
+    subTotalCost.innerHTML = subcost.toFixed(2);
   }
 
   //Funcion para calcular el envío.
@@ -66,13 +86,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (shipTypes[0].checked) {
 
-      shippingCost = Math.round(shipTypes[0].value * subtotal);
+      shippingCost = Math.round(shipTypes[0].value * subtotal);     
+      
     }
+      
+    
     if (shipTypes[1].checked) {
-      shippingCost = Math.round(shipTypes[1].value * subtotal);
+      shippingCost = Math.round(shipTypes[1].value * subtotal);     
+      
     }
+    
     if (shipTypes[2].checked) {
       shippingCost = Math.round(shipTypes[2].value * subtotal);
+      
+    
     }
 
     shippingCostLabel.innerHTML = shippingCost;
@@ -85,7 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const sumatoria = parseInt(subTotalCost.innerText) + shippingCost;
     totalCost.innerHTML = sumatoria;
     console.log(sumatoria)
-  }
+
+      }
 
   // Realizar la solicitud Fetch para obtener el carrito de compras
   fetch(cartUrl)
@@ -135,9 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const cantidadInput = row.querySelector('.cantidadInput');
       cantidadInput.addEventListener('change', () => {
         actualizarPrecio(cantidadInput);
-        summarySubCost()
+        /* summarySubCost()
         sumatoriaTotal()
-        calcShipping()
+        calcShipping() */
       });
 
       const botonBorrarCarrito = row.querySelector(".button-delete");
@@ -151,22 +179,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para actualizar subtotal en base al cambio de cantidad
   function actualizarPrecio(input) {
-    let conversionValueUSD = 40;
+    
     const row = input.closest('tr');
     const subtotalElement = row.querySelector('.subTotal');
     const monedaElement = row.querySelector('.moneda');
     const moneda = monedaElement.innerText;
     const cantidad = input.value;
     const costo = row.querySelector('.costo').innerText;
-    if (moneda == "USD") {
-      subtotalElement.innerText = cantidad * costo;
-    } else {
-      subtotalElement.innerText = (cantidad * costo) / conversionValueUSD;
-      monedaElement.innerText = "USD";
-    }
-    
-    
-    
+    // Calcular el subtotal en la moneda original
+  const subtotalOriginal = cantidad * costo;
+
+  // Mostrar el subtotal en la moneda original
+  subtotalElement.innerText = subtotalOriginal;
+      
   
     summarySubCost()
     sumatoriaTotal()
@@ -197,6 +222,8 @@ document.addEventListener("DOMContentLoaded", () => {
     calcShipping();
   }
   }
+
+  
 
   // Max add: contenido respectivo para hacer los controles gráficos de envío y dirección
   function addGraphicsControls() {
@@ -253,7 +280,6 @@ document.addEventListener("DOMContentLoaded", () => {
   summarySubCost();
     sumatoriaTotal();
     calcShipping();
-
   const btnForm = document.getElementById('Comprar');
   const inputCalle = document.getElementById("calle");
   const inputNumero = document.getElementById("numero");
