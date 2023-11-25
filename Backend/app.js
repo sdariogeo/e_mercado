@@ -7,16 +7,39 @@ const peopleRouter = require("./routes/peopleRoute");
 const categories = require("./emercado-api-main/cats/cat.json");
 //const cats_products = require("./emercado-api/cats_products/");
 const app = express();
+const cors = require("cors");
 const port = 3000;
 
 app.use(express.json());
+app.use(cors());
 
+/* TRATANDO DE HACER EL DESAFIATE - INTENTO DE GUARDAR PRODUCTOS DEL CARRITO DESDE LOCALSTORAGE A LA BASE DE DATOS
+app.post("saveCartToDataBase", async (req, res) =>{
+  let conn;
+  try {
+    const cartData = req.body;
+
+    conn = await pool.getConnection();
+    await conn.query(
+      "INSERT INTO user_cart (name, count, unit_cost, currency) VALUES (?,?,?,?)",
+      [cartData.name, cartData.count, cartData.unit_cost, cartData.currency]
+    );
+
+    res.json({ success: true, message: "Datos del carrito guardados en la base de datos." });
+  } catch (error) {
+    console.error("Error al guardar los datos del carrito en la base de datos:", error);
+    res.status(500).json({ success: false, message: "Error al guardar los datos del carrito." });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+ */
 app.get("/", (req, res) => {
   res.send("<h1>Bienvenid@ al servidor del e-commerce</h1>");
 });
 
 //Con este GET se traen los archivos del directorio de cats
-app.get("/cats", (req, res) => {
+app.get("/cats/cat", (req, res) => {
   res.json(categories);
 });
 //Con este GET se traen los archivos de cats_products por id
