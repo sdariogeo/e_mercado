@@ -37,7 +37,7 @@ app.get("/products_comments/:id", (req, res) => {
   res.sendFile(path.join(__dirname, `./emercado-api-main/user_cart/${req.params.id}.json`));
  });
 // la autenticación funciona
-app.post("/cart", (req, res) => {
+app.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (username === "duende" && password === "pajero") {
     const token = jwt.sign({ username }, SECRET_KEY);

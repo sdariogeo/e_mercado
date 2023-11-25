@@ -1,5 +1,5 @@
 {
     "editor.acceptSuggestionOnEnter": "on",
     "liveServer.settings.port": 5501,
-    "editor.inlineSuggest.showToolbar": "onHover"
+    "editor.inlineSuggest.showToolbar": "always"
 }
