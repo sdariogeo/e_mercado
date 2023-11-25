@@ -9,7 +9,7 @@ const pool = mariadb.createPool({
   connectionLimit: 5,
 });
 
-const getUsers = async () => {
+const getProducts = async () => {
   let conn;
   try {
     conn = await pool.getConnection();
@@ -25,7 +25,7 @@ const getUsers = async () => {
   return false;
 };
 
-const getUserById = async (id) => {
+const getProductById = async (id) => {
   let conn;
   try {
     conn = await pool.getConnection();
@@ -43,16 +43,16 @@ const getUserById = async (id) => {
   return false;
 };
 
-const createUser = async (user) => {
+const createProduct = async (product) => {
   let conn;
   try {
     conn = await pool.getConnection();
     const response = await conn.query(
       `INSERT INTO user_cart(name, count, unit_cost, currency) VALUE(?, ?, ?, ?)`,
-      [user.name, user.lastname, user.email]
+      [product.name, product.count, product.unit_cost, product.currency]
     );
 
-    return { id: parseInt(response.insertId), ...user };
+    return { id: parseInt(response.insertId), ...product };
   } catch (error) {
     console.log(error);
   } finally {
@@ -61,16 +61,16 @@ const createUser = async (user) => {
   return false;
 };
 
-const updateUser = async (id, user) => {
+const updateProduct = async (id, product) => {
   let conn;
   try {
     conn = await pool.getConnection();
     await conn.query(
       `UPDATE user_cart SET name=?, count=?, unit_cost=?, currency=? WHERE id=?`,
-      [user.name, user.lastname, user.email, id]
+      [product.name, product.count, product.unit_cost, product.currency, id]
     );
 
-    return { id, ...user };
+    return { id, ...product };
   } catch (error) {
     console.log(error);
   } finally {
@@ -79,7 +79,7 @@ const updateUser = async (id, user) => {
   return false;
 };
 
-const deleteUser = async (id) => {
+const deleteProduct = async (id) => {
   let conn;
   try {
     conn = await pool.getConnection();
@@ -95,9 +95,9 @@ const deleteUser = async (id) => {
 };
 
 module.exports = {
-  getUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
 };

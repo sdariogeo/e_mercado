@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = "EL ASADO ES EN DICIEMBRE";
 const path = require("path");
 // Aquí importamos los routers
-const peopleRouter = require("./routes/peopleRoute");
+const productsRouter = require("./routes/productRoute");
 const categories = require("./emercado-api-main/cats/cat.json");
 //const cats_products = require("./emercado-api/cats_products/");
 const app = express();
@@ -85,7 +85,7 @@ app.use("/cart", (req, res, next) => {
 //---
 
 // Asociamos el router de people con la ruta /people
-app.use("/cart", peopleRouter);
+app.use("/cart", productsRouter);
 
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
