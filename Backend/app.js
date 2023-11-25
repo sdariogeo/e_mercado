@@ -1,6 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "CLAVE ULTRA SECRETA";
+const SECRET_KEY = "EL ASADO ES EN DICIEMBRE";
 const path = require("path");
 // Aquí importamos los routers
 const peopleRouter = require("./routes/peopleRoute");
@@ -39,7 +39,7 @@ app.get("/products_comments/:id", (req, res) => {
 // la autenticación funciona
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
-  if (username === "duende" && password === "pajero") {
+  if (username === "duende" && password === "asado") {
     const token = jwt.sign({ username }, SECRET_KEY);
     res.status(200).json({ token });
   } else {
@@ -47,8 +47,9 @@ app.post("/login", (req, res) => {
   }
 });
 
-// Middleware que autoriza a realizar peticiones a /emercado-api
+// Middleware que autoriza a realizar peticiones a /emercado-api (no sería realizar peticiones a /cart ?)
 //Problema: el middleware devuelve false
+// Posible respuesta: creo que está devolviendo false porque en el archivo peopleModel.js todos los métodos consultan a la base de datos, pero no tenemos una base de datos asociada
 app.use("/cart", (req, res, next) => {
   try {
     const decoded = jwt.verify(req.headers["access_token"], SECRET_KEY);

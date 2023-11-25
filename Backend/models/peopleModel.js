@@ -4,8 +4,8 @@ const mariadb = require("mariadb");
 const pool = mariadb.createPool({
   host: "localhost",
   user: "root",
-  password: "1234",
-  database: "pruebadb",
+  password: "palosanto",
+  database: "emercadodb",
   connectionLimit: 5,
 });
 
@@ -14,7 +14,7 @@ const getUsers = async () => {
   try {
     conn = await pool.getConnection();
     const rows = await conn.query(
-      "SELECT id, name, lastname, email FROM people"
+      "SELECT id, name, count, unit_cost, currency FROM user_cart"
     );
 
     return rows;
@@ -30,7 +30,7 @@ const getUserById = async (id) => {
   try {
     conn = await pool.getConnection();
     const rows = await conn.query(
-      "SELECT id, name, lastname, email FROM people WHERE id=?",
+      "SELECT id, name, count, unit_cost, currency FROM user_cart WHERE id=?",
       [id]
     );
 
@@ -48,7 +48,7 @@ const createUser = async (user) => {
   try {
     conn = await pool.getConnection();
     const response = await conn.query(
-      `INSERT INTO people(name, lastname, email) VALUE(?, ?, ?)`,
+      `INSERT INTO user_cart(name, count, unit_cost, currency) VALUE(?, ?, ?, ?)`,
       [user.name, user.lastname, user.email]
     );
 
@@ -66,7 +66,7 @@ const updateUser = async (id, user) => {
   try {
     conn = await pool.getConnection();
     await conn.query(
-      `UPDATE people SET name=?, lastname=?, email=? WHERE id=?`,
+      `UPDATE user_cart SET name=?, count=?, unit_cost=?, currency=? WHERE id=?`,
       [user.name, user.lastname, user.email, id]
     );
 
@@ -83,7 +83,7 @@ const deleteUser = async (id) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    await conn.query("DELETE FROM people WHERE id=?", [id]);
+    await conn.query("DELETE FROM user_cart WHERE id=?", [id]);
 
     return true;
   } catch (error) {
@@ -96,7 +96,7 @@ const deleteUser = async (id) => {
 
 module.exports = {
   getUsers,
- getUserById,
+  getUserById,
   createUser,
   updateUser,
   deleteUser,
