@@ -20,6 +20,42 @@ document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("detalle-producto");
         detalleProductoContainer.innerHTML = detalleProductoHTML;
 
+        const buttonAgregarAlCarrito = document.getElementById("agregarAlCarrito");
+
+        buttonAgregarAlCarrito.addEventListener("click", () => {
+        agregarProductoAlCarrito(productId, product);
+        });
+
+        function agregarProductoAlCarrito(productId) {
+          // Realiza una solicitud Fetch para obtener los detalles del producto
+          fetch(`https://japceibal.github.io/emercado-api/products/${productId}.json`)
+              .then((response) => response.json())
+              .then((product) => {
+                  // Recupera el carrito actual desde localStorage o crea uno vacío si no existe
+                  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      
+                  // Verifica si el producto ya está en el carrito
+                  const productoExistente = carrito.find(item => item.id === product.id);
+      
+                  // Si el producto ya está en el carrito, no lo agregamos de nuevo
+                  if (productoExistente) {
+                      alert("El producto ya está en el carrito");
+                  } else {
+                      // Agrega el producto al carrito
+                      carrito.push(product);
+      
+                      // Guarda el carrito actualizado en localStorage
+                      localStorage.setItem("carrito", JSON.stringify(carrito));
+      
+                      // Notifica al usuario que el producto se agregó al carrito
+                      alert("Producto agregado al carrito");
+      
+                      // Redirige a la página cart.html si es necesario
+                      /* window.location.href = "cart.html"; */
+                  }
+              });
+      }
+
         // hacemos un bucle for-of para poder iterar el array de las imágenes correctamente
         // Selecciona el contenedor del carrusel
         const carruselContainer = document.querySelector(".carousel-inner");
