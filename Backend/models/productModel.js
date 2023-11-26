@@ -4,9 +4,9 @@ const mariadb = require("mariadb");
 const pool = mariadb.createPool({
   host: "localhost",
   user: "root",
-  password: "palosanto",
+  password: "fire0987",
   database: "emercadodb",
-  connectionLimit: 5,
+  connectionLimit: 20,
 });
 
 const getProducts = async () => {
@@ -14,7 +14,7 @@ const getProducts = async () => {
   try {
     conn = await pool.getConnection();
     const rows = await conn.query(
-      "SELECT id, name, count, unit_cost, currency FROM user_cart"
+      "SELECT id, name, cost, currency FROM user_cart"
     );
 
     return rows;
@@ -30,7 +30,7 @@ const getProductById = async (id) => {
   try {
     conn = await pool.getConnection();
     const rows = await conn.query(
-      "SELECT id, name, count, unit_cost, currency FROM user_cart WHERE id=?",
+      "SELECT id, name, cost, currency FROM user_cart WHERE id=?",
       [id]
     );
 
@@ -48,8 +48,8 @@ const createProduct = async (product) => {
   try {
     conn = await pool.getConnection();
     const response = await conn.query(
-      `INSERT INTO user_cart(name, count, unit_cost, currency) VALUE(?, ?, ?, ?)`,
-      [product.name, product.count, product.unit_cost, product.currency]
+      `INSERT INTO user_cart(name, cost, currency) VALUE(?, ?, ?)`,
+      [product.name, product.cost, product.currency]
     );
 
     return { id: parseInt(response.insertId), ...product };
@@ -66,8 +66,8 @@ const updateProduct = async (id, product) => {
   try {
     conn = await pool.getConnection();
     await conn.query(
-      `UPDATE user_cart SET name=?, count=?, unit_cost=?, currency=? WHERE id=?`,
-      [product.name, product.count, product.unit_cost, product.currency, id]
+      `UPDATE user_cart SET name=?, cost=?, currency=? WHERE id=?`,
+      [product.name, product.cost, product.currency, id]
     );
 
     return { id, ...product };

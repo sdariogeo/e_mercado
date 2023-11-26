@@ -140,8 +140,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
       console.log("Carrito actualizado:", carrito);
 
-
-    
+//Tomo los datos del producto en un objeto, la función 
+//consulta las propiedades correspondientes de cada clave
+function arrayCart () {
+  for (let i = 0; i < carrito.length; i++){
+    const productData = {
+      name: carrito[i].name,
+      cost: carrito[i].cost,
+      currency: carrito[i].currency
+  }
+  console.log("hola, estos son los datos", productData);
+  let myHeaders = new Headers();
+  myHeaders.append("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1ZW5kZSIsImlhdCI6MTcwMTAxNjI0OH0.TS2ugHluQrHAuqfH_IBb4N8cwYxERHCfS-IIC7NNXcE");
+  myHeaders.append("Content-Type", "application/json");
+  let requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body:JSON.stringify(productData),
+    redirect: 'follow'
+  };
+//Se realiza el fetch con solicitud POST que envía el objeto
+  fetch("http://localhost:3000/cart", requestOptions)
+    .then(response => response.json())
+    .then(result => console.log("el producto ha sido enviado",result))
+    .catch(error => console.log('error', error));
+}
+//---fin de la solicitud POST
+}
+//Se llama la función 
+arrayCart ();
 
   // Verifica si el carrito tiene productos
   if (carrito.length > 0) {
@@ -294,7 +321,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let valorCalle = inputCalle.value;
     let valorNumero = inputNumero.value;
     let valorEsquina = inputEsquina.value;
-    let valorCardselect = dividCardselect.value; //esto se puede borrar porque no se está usando
 
 
     if (valorCalle == "") {
