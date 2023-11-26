@@ -13,27 +13,6 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-/* TRATANDO DE HACER EL DESAFIATE - INTENTO DE GUARDAR PRODUCTOS DEL CARRITO DESDE LOCALSTORAGE A LA BASE DE DATOS
-app.post("saveCartToDataBase", async (req, res) =>{
-  let conn;
-  try {
-    const cartData = req.body;
-
-    conn = await pool.getConnection();
-    await conn.query(
-      "INSERT INTO user_cart (name, count, unit_cost, currency) VALUES (?,?,?,?)",
-      [cartData.name, cartData.count, cartData.unit_cost, cartData.currency]
-    );
-
-    res.json({ success: true, message: "Datos del carrito guardados en la base de datos." });
-  } catch (error) {
-    console.error("Error al guardar los datos del carrito en la base de datos:", error);
-    res.status(500).json({ success: false, message: "Error al guardar los datos del carrito." });
-  } finally {
-    if (conn) conn.release();
-  }
-});
- */
 app.get("/", (req, res) => {
   res.send("<h1>Bienvenid@ al servidor del e-commerce</h1>");
 });
